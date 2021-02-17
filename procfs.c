@@ -11,13 +11,14 @@
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
     LOGP("Getting the hostname\n");
-
+    //opens path
     int fd = open_path(proc_dir, "sys/kernel/hostname");
+    //error checking
     if (fd == -1) {
         perror("open_path");
         return -1;
     }
-
+    //
     ssize_t read_sz = lineread(fd, hostname_buf, buf_sz);
     if (read_sz == -1) {
         return -1;
@@ -129,7 +130,6 @@ int pfs_format_uptime(double time, char *uptime_buf)
     int years_remainder = (int)time % 31556952;
 
     int days = (years_remainder/(24 * 3600));
-    // time = int(time) % (24 * 3600);
     int days_remainder = (int)years_remainder % (24 * 3600);
 
     int hours = (days_remainder / 3600);
@@ -141,34 +141,18 @@ int pfs_format_uptime(double time, char *uptime_buf)
     int seconds = minutes_remainder; 
     
     if (years == 0) {
-        // strcpy(uptime_buf, days);
-        // strcat(uptime_buf, hours);
-        // strcat(uptime_buf, minutes);
-        // strcat(uptime_buf, seconds); 
         sprintf(uptime_buf, "%d days, %d hours, %d minutes, %d seconds", days, hours, minutes, seconds);
     }
     else if (days == 0) {
-        // strcpy(uptime_buf, hours);
-        // strcat(uptime_buf, minutes);
-        // strcat(uptime_buf, seconds);  
         sprintf(uptime_buf, "%d hours, %d minutes, %d seconds", hours, minutes, seconds);
     }
     else if (hours == 0) {
-        // strcpy(uptime_buf, minutes);  
-        // strcat(uptime_buf, seconds);
         sprintf(uptime_buf, "%d minutes, %d seconds", minutes, seconds);
     }
     else if (minutes == 0) {
-        // strcpy(uptime_buf, "0");
-        // strcat(uptime_buf, seconds);
         sprintf(uptime_buf, "%d minutes, %d seconds", 0, seconds);
     }
     else {
-        // strcpy(uptime_buf, years);
-        // strcat(uptime_buf, days);
-        // strcat(uptime_buf, hours);
-        // strcat(uptime_buf, minutes);
-        // strcat(uptime_buf, seconds);
         sprintf(uptime_buf, "%d years, %d days, %d hours, %d minutes, %d seconds", years, days, hours, minutes, seconds);
     }
 
@@ -177,81 +161,74 @@ int pfs_format_uptime(double time, char *uptime_buf)
 
 struct load_avg pfs_load_avg(char *proc_dir)
 {  
-
     // LOGP("Getting the load average\n");
 
     // int fd = open_path(proc_dir, "loadavg");
     // if (fd == -1) {
     //     perror("open_path");
-    //     return -1;
+        struct load_avg lavg = { 0 };
     // }
-    // char line[256] = { 0 };
-    struct load_avg lavg = { 0 };
-    // // one_lineread(proc_dir, "loadavg");
-    // lineread(fd, line, 256);
+    // char line[50] = { 0 };
+    // // struct load_avg lavg = { 0 };
+    // one_lineread(fd, line, 50, "\n");
     // size_t loadavg_loc = strcspn(line, " ") + 10;
-    // strncpy(lavg, line, loadavg_loc);
+    // strncpy(struct load_avg lavg, &line, loadavg_loc);
 
     return lavg;
 }
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
-    // LOGP("Getting the cpu usage\n");
+    LOGP("Getting the cpu usage\n");
 
-    // double idle1, idle2, total1, total2 = 0;
-    // idle1 = prev->idle;
-    // total1 = prev->total;
+    double idle1, idle2, total1, total2 = 0.0;
+    idle1 = prev->idle;
+    total1 = prev->total;
+    //opens file
+    int fd = open_path(proc_dir, "stat");
+    //error checking
+    if (fd == -1) {
+        perror("open_path");
+        return -1;
+    }
+    size_t read_sz = 0;
+    char line[256];
+    while ((read_sz = lineread(fd, line, 256)) > 0) {
+        //check for "cpu " in line
+        if (strstr(line, "cpu ")) {
+            char *next_tok = line;
+            char *curr_tok;
+            char *end_ptr;
+            int counter = 0;
+            //Iterate and tokenize line
+            while ((curr_tok = next_token(&next_tok, " ")) != NULL) {
+                    //checks if not in "cpu"
+                    if (counter != 0) {
+                        //add value to total2
+                        total2 += strtod(curr_tok, &end_ptr);
+                        //checks when in idle
+                        if (counter == 4) {
+                           //stores idle value to idle2 
+                           idle2 = strtod(curr_tok, &end_ptr);
+                        }
+                    }
+                    counter++;
+            }
+            curr->idle = idle2;
+            curr->total = total2; 
+        }
+    }
+     LOG("Total2 and Idle2: %f %f\n", total2, idle2);
+     LOG("Total1 and Idle1: %f %f\n", total1, idle1);
+    double cpu_usage = 1 - ((idle2 - idle1) / (total2 - total1));
+    if (isnan(cpu_usage)) {
+        return 0.0;
+    }
 
-    // int fd = open_path(proc_dir, "stat");
-    // if (fd == -1) {
-    //     perror("open_path");
-    //     return -1;
-    // }
-
-    // size_t read_sz = 0;
-    // char line[256];
-    // while ((read_sz = lineread(fd, line, 256)) > 0) {
-    //     // LOG("line: %s\n", line);
-    //     int counter = 0;
-    //     //check for "cpu " in line
-    //     if (strstr(line, "cpu ")) {
-    //         char *next_tok = line;
-    //         char *curr_tok;
-    //         // LOG("Curr tok: %s\n", line);
-    //         //Tokenize.
-    //         while ((curr_tok = next_token(&next_tok, " ")) != NULL) {
-    //         // LOG("Tokenize: %s\n", next_tok);
-    //                 if (counter != 0) {
-    //                     total2 += atol(curr_tok);
-    //                     if (counter == 4) {
-    //                        idle2 = atol(curr_tok);
-    //                         // idle2 = counter - 1;
-    //                     }
-    //                 }
-    //                 counter++;
-    //         }
-    //         curr->idle = idle2;
-    //         curr->total = total2;
-    //             // LOG("Idle: %s\n", idle2);  
-    //         // }
-    //         // counter++;
-    //     }
-    // }
-    //  LOG("Total2 and Idle2: %ld %ld\n", total2, idle2);
-    //  LOG("Total1 and Idle1: %ld %ld\n", total1, idle1);
-    // double idle = idle2 - idle1;
-    // double total = total2 - total1;
-    // double cpu_usage = 1.0 - (idle / total);
-    // if (isnan(cpu_usage)) {
-    //     return 0.0;
-    // }
-
-    // close(fd);
-    // // LOG("Total and Idle: %ld %ld\n", total, idle);
-    // LOG("CPU_USAGE TOTAL: %ld", cpu_usage);
-    // return cpu_usage;
-    return 0.0;
+    close(fd);
+    // LOG("Total and Idle: %ld %ld\n", total, idle);
+    LOG("CPU_USAGE TOTAL: %f", cpu_usage);
+    return cpu_usage;
 }
 
 struct mem_stats pfs_mem_usage(char *proc_dir)
@@ -259,9 +236,23 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     // int fd = open_path(proc_dir, "meminfo");
     // if (fd == -1) {
     //     perror("open_path");
-    //     return -1;
+    //     struct mem_stats mstats = { 0 };
     // }
 
+    // char line[256] = { 0 };
+
+    // ssize_t read_sz = 0;    
+    // while ((read_sz = lineread(fd, line, 256)) > 0) {
+    //     if (strncmp(line, "MemTotal", 8) == 0) {
+    //         size_t memTotal_loc = strcspn(line, ":");
+    //         size_t newline_loc = strcspn(&line[memTotal_loc], "\n");
+    //         // strncpy(model_buf, &line[model_loc], newline_loc);
+    //     }
+    //     if (strncmp(line, "MemAvailable", 12) == 0) {
+
+    //     }
+    // }   
+    // close(fd);
     struct mem_stats mstats = { 0 };
     return mstats;
 }
