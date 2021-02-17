@@ -13,6 +13,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include "logger.h"
 #include "display.h"
@@ -95,6 +98,13 @@ int main(int argc, char *argv[])
 
     if (alt_proc == true) {
         LOG("Using alternative proc directory: %s\n", options.procfs_loc);
+
+        int fd = open(options.procfs_loc, O_RDONLY);
+        if (fd == -1) {
+            fprintf(stderr, "Invalid proc directory: %s\n", options.procfs_loc);
+            return EXIT_FAILURE;
+        }
+        close(fd);
     }
 
     if (options.one_shot == true) {
