@@ -161,19 +161,31 @@ int pfs_format_uptime(double time, char *uptime_buf)
 
 struct load_avg pfs_load_avg(char *proc_dir)
 {  
-    // LOGP("Getting the load average\n");
+    LOGP("Getting the load average\n");
 
-    // int fd = open_path(proc_dir, "loadavg");
-    // if (fd == -1) {
-    //     perror("open_path");
-        struct load_avg lavg = { 0 };
-    // }
-    // char line[50] = { 0 };
-    // // struct load_avg lavg = { 0 };
-    // one_lineread(fd, line, 50, "\n");
+    struct load_avg lavg = { 0 };
+
+    int fd = open_path(proc_dir, "loadavg");
+    if (fd == -1) {
+        perror("open_path");
+        return lavg;
+    }
+    char line[50] = { 0 };
+    // struct load_avg lavg = { 0 };
+    one_lineread(fd, line, 50, "\n");
     // size_t loadavg_loc = strcspn(line, " ") + 10;
     // strncpy(struct load_avg lavg, &line, loadavg_loc);
+    char *next_tok = line;
+    char *curr_tok;
+    char *end_ptr;
+    curr_tok = next_token(&next_tok, " ");
+    lavg.one = strtod(curr_tok, &end_ptr);
+    curr_tok = next_token(&next_tok, " ");
+    lavg.five = strtod(curr_tok, &end_ptr);
+    curr_tok = next_token(&next_tok, " ");
+    lavg.fifteen = strtod(curr_tok, &end_ptr);
 
+    close(fd);
     return lavg;
 }
 
@@ -192,7 +204,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
         return -1;
     }
     size_t read_sz = 0;
-    char line[256];
+    char line[256] = { 0 };
     while ((read_sz = lineread(fd, line, 256)) > 0) {
         //check for "cpu " in line
         if (strstr(line, "cpu ")) {
@@ -218,16 +230,15 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
             curr->total = total2; 
         }
     }
-     LOG("Total2 and Idle2: %f %f\n", total2, idle2);
-     LOG("Total1 and Idle1: %f %f\n", total1, idle1);
-    double cpu_usage = 1 - ((idle2 - idle1) / (total2 - total1));
+    if ((idle2 - idle1 < 0) || (total2 - total1 < 0)) {
+        return 0.0;
+    }
+    double cpu_usage = 1 - ((idle2-idle1) / (total2-total1));
     if (isnan(cpu_usage)) {
         return 0.0;
     }
 
     close(fd);
-    // LOG("Total and Idle: %ld %ld\n", total, idle);
-    LOG("CPU_USAGE TOTAL: %f", cpu_usage);
     return cpu_usage;
 }
 
