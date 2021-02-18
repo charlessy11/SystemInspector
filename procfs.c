@@ -1,8 +1,17 @@
+#include <linux/limits.h>
+#include "procfs.h"
 #include <string.h>
-#include <unistd.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <time.h>
 #include <math.h>
+#include <dirent.h>
+#include <sys/types.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <sys/stat.h>
 
 #include "logger.h"
 #include "procfs.h"
@@ -106,19 +115,14 @@ double pfs_uptime(char *proc_dir)
         perror("open_path");
         return -1;
     }
-    char line[256] = { 0 };
-    char *ptr;
+    char line[100] = { 0 };
+    char *end_ptr;
     double time;
-    // char temp[256] = { 0 };
-    lineread(fd, line, 256);
-    // size_t uptime_loc = strcspn(line, " ");
-    // strncpy(temp, line, uptime_loc);
+    one_lineread(fd, line, 100, "\n");
     // convert string to double
-    time = strtod(line, &ptr);
-    // double *time = (double *)temp;
+    time = strtod(line, &end_ptr);
 
     close(fd);
-
     return time;
 }
 
@@ -170,11 +174,9 @@ struct load_avg pfs_load_avg(char *proc_dir)
         perror("open_path");
         return lavg;
     }
-    char line[50] = { 0 };
-    // struct load_avg lavg = { 0 };
-    one_lineread(fd, line, 50, "\n");
-    // size_t loadavg_loc = strcspn(line, " ") + 10;
-    // strncpy(struct load_avg lavg, &line, loadavg_loc);
+    char line[100] = { 0 };
+    one_lineread(fd, line, 100, "\n");
+
     char *next_tok = line;
     char *curr_tok;
     char *end_ptr;
@@ -203,8 +205,8 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
         perror("open_path");
         return -1;
     }
-    size_t read_sz = 0;
     char line[256] = { 0 };
+    size_t read_sz = 0;
     while ((read_sz = lineread(fd, line, 256)) > 0) {
         //check for "cpu " in line
         if (strstr(line, "cpu ")) {
@@ -244,42 +246,78 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 
 struct mem_stats pfs_mem_usage(char *proc_dir)
 {
-    // int fd = open_path(proc_dir, "meminfo");
-    // if (fd == -1) {
-    //     perror("open_path");
-    //     struct mem_stats mstats = { 0 };
-    // }
+    LOGP("Getting the mem usage");
 
-    // char line[256] = { 0 };
-
-    // ssize_t read_sz = 0;    
-    // while ((read_sz = lineread(fd, line, 256)) > 0) {
-    //     if (strncmp(line, "MemTotal", 8) == 0) {
-    //         size_t memTotal_loc = strcspn(line, ":");
-    //         size_t newline_loc = strcspn(&line[memTotal_loc], "\n");
-    //         // strncpy(model_buf, &line[model_loc], newline_loc);
-    //     }
-    //     if (strncmp(line, "MemAvailable", 12) == 0) {
-
-    //     }
-    // }   
-    // close(fd);
     struct mem_stats mstats = { 0 };
+    double mem_total, mem_available = 0;
+
+    int fd = open_path(proc_dir, "meminfo");
+    if (fd == -1) {
+        perror("open_path");
+        return mstats;
+    }
+    char line[256] = { 0 };
+    ssize_t read_sz = 0;    
+    while ((read_sz = lineread(fd, line, 256)) > 0) {
+        char *next_tok = line;
+        char *curr_tok;
+        char *end_ptr;
+        if (strstr(line, "MemTotal:")) {
+            LOG("LINE = %s\n", line);
+            curr_tok = next_token(&next_tok, " ");
+            curr_tok = next_token(&next_tok, " ");
+            // size_t mem_total_loc = strcspn(line, )
+            mem_total = strtod(curr_tok, &end_ptr);
+            //convert to GiB
+            mem_total = mem_total / 1024 / 1024;
+            mstats.total = mem_total;
+            LOG("MEM TOTAL = %f\n", mem_total);
+        }
+        if (strstr(line, "MemAvailable:"))  {
+            LOG("LINE = %s\n", line);
+            curr_tok = next_token(&next_tok, " ");
+            curr_tok = next_token(&next_tok, " ");
+            mem_available = strtod(curr_tok, &end_ptr);
+            //convert to GiB
+            mem_available = mem_available / 1024 / 1024;
+            LOG("MEM AVAIL = %f\n", mem_available);
+            // if (mstats.total - mem_available < 0) {
+            //     return mstats;
+            // }
+        }
+    }   
+    mstats.used = mstats.total - mem_available;
+
+    close(fd);
     return mstats;
 }
 
 struct task_stats *pfs_create_tstats()
 {
-    return NULL;
+    struct task_stats *ts = calloc(1, sizeof(struct task_stats));
+    if (ts != NULL) {
+        ts->total = 0;
+        ts->running = 0;
+        ts->waiting = 0;
+        ts->sleeping = 0;
+        ts->stopped = 0;
+        ts->zombie = 0;
+
+        ts->active_tasks = calloc(1, sizeof(struct task_info));
+    }
+
+    return ts;
 }
 
 void pfs_destroy_tstats(struct task_stats *tstats)
 {
-
+    //free active tasks
+    free(tstats->active_tasks);
+    //free tstats
+    free(tstats);
 }
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 {
-    return -1;
+    return 0;
 }
-

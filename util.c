@@ -114,7 +114,6 @@ void draw_percbar(char *buf, double frac) {
 
 }
 
-void uid_to_uname(char *name_buf, uid_t uid)
-{
-    strcpy(name_buf, "(UNKNOWN)");
+void uid_to_uname(char *name_buf, uid_t uid) {
+
 }

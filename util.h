@@ -2,6 +2,8 @@
 #define _UTIL_H_
 
 #include <sys/types.h>
+#include <dirent.h>
+#include <stdio.h>
 
 int open_path(char *proc_dir, char *path);
 ssize_t one_lineread(int fd, char *buf, size_t sz, char *delim);
