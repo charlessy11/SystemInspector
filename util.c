@@ -111,7 +111,32 @@ char *next_token(char **str_ptr, const char *delim)
 }
 
 void draw_percbar(char *buf, double frac) {
+	//percbar has a total of 20 '-'/'#', so we allocate space for that plus allowance
+	char percbar[40] = { 0 };
+	percbar[0] = '[';
+	percbar[21] = ']';
 
+	if (frac <= 0 || isnan(frac)) {
+		frac = 0;
+	}
+	else if (frac > 1 || isinf(frac)) {
+		frac = 1;
+	}
+
+	int amount = (((round(frac * 100)) / 5 ) + 1);
+
+	int i;
+	for (i = 1; i < amount; i++) {
+		percbar[i] = '#';
+	}
+	int j;
+	for (j = i; j <= 20; j++) {
+		percbar[j] = '-';
+	}
+
+	frac = frac * 100;
+	buf += snprintf(buf, 40, "%s ", percbar);
+	snprintf(buf, 40, "%.1f%%", frac);
 }
 
 void uid_to_uname(char *name_buf, uid_t uid) {
