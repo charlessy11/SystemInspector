@@ -140,5 +140,35 @@ void draw_percbar(char *buf, double frac) {
 }
 
 void uid_to_uname(char *name_buf, uid_t uid) {
+	char *path = "/etc/passwd";
+	char temp[_POSIX_PATH_MAX];
 
+	int fd = open(path, O_RDONLY);
+
+	bool is_changed = false;
+	char *ptr;
+
+	while (true) {
+		ssize_t read_sz = one_lineread(fd, temp, _POSIX_PATH_MAX, "\n");
+		if (read_sz <= 0) {
+			break;
+		}
+
+		char name[1000];
+        strcpy(name, temp);
+
+        ptr = name;
+		sprintf(name, "%s", next_token(&ptr, ":"));
+		next_token(&ptr, ":");
+
+		if (atoi(next_token(&ptr, ":")) == uid) {
+			sprintf(name_buf, "%s", name);
+			is_changed = true;
+		}
+		if (is_changed == false) {
+			sprintf(name_buf, "%d", uid);
+		}
+	}
+	close(fd);
+	name_buf[15] = '\0';
 }
