@@ -2,6 +2,9 @@
 
 See: https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html 
 
+About This Project:
+
+
 To compile and run:
 
 ```bash
