@@ -345,13 +345,12 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
 
                 ssize_t read_sz = 0;    
                 while ((read_sz = lineread(fd, line, 1000)) > 0) {
-                    if(strstr(line, "Name:")) {
+                    if (strstr(line, "Name:")) {
                         char *next_tok = line;
                         next_token(&next_tok, " \t\n");
                         strcpy(task_name, next_token(&next_tok, " \t\n"));
                     }
-
-                    if(strstr(line, "State:")) {
+                    else if (strstr(line, "State:")) {
                         char *next_tok = line;
                         next_token(&next_tok, "\t");
                         char symbol = *(next_token(&next_tok, " "));
@@ -372,8 +371,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                             waiting++;
                         }
                     }
-
-                    if(strstr(line, "Uid:")) {
+                    else if (strstr(line, "Uid:")) {
                         char *next_tok = line;
                         char *curr_tok;
                         curr_tok = next_token(&next_tok, " \t\n");
