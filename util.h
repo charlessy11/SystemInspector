@@ -58,7 +58,7 @@ char *next_token(char **str_ptr, const char *delim);
 void draw_percbar(char *buf, double frac);
 
 /**
-* Draws percentage bar
+* Maps ID numbers (UID) associated with running processes to corresponding username
 *
 * @param name_buf stores names
 * @param uid the user identification
