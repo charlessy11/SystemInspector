@@ -33,7 +33,7 @@ Here is a list of methods that reads the different contents of `\proc`:
     double total;
 };`
 
-**Task statistics: **
+*Task statistics: 
 `struct task_stats {
     unsigned int total;
     unsigned int running;
@@ -69,6 +69,8 @@ Here is a list of methods that reads the different contents of `\proc`:
 
 *Formats uptime(in seconds) to days, hours, minutes, and seconds: 
 `int pfs_format_uptime(double time, char *uptime_buf);`
+
+* Retrieves load average of the machine: 'struct load_avg pfs_load_avg(char *proc_dir);'
 
 To compile and run:
 
