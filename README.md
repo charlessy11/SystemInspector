@@ -64,7 +64,7 @@ Here is a list of methods that reads the different contents of `\proc`:
 
 * Formats uptime(in seconds) to days, hours, minutes, and seconds: `int pfs_format_uptime(double time, char *uptime_buf);`
 
-* Retrieves load average of the machine: 'struct load_avg pfs_load_avg(char *proc_dir);'
+* Retrieves load average of the machine: `struct load_avg pfs_load_avg(char *proc_dir);`
 
 * Retrieves cpu usage of the machine: `double pfs_cpu_usage(char *procfs_dir, struct cpu_stats *prev, struct cpu_stats *curr);`
 
@@ -75,6 +75,21 @@ Here is a list of methods that reads the different contents of `\proc`:
 * Frees memory for task_stats structs: `void pfs_destroy_tstats(struct task_stats *tstats);`
 
 * Retrieves tasks info of the machine: `int pfs_tasks(char *proc_dir, struct task_stats *tstats);`
+
+Here is a list of helper methods:
+
+* Opens specified path: `int open_path(char *proc_dir, char *path);`
+
+* Reads one line of file: `ssize_t one_lineread(int fd, char *buf, size_t sz, char *delim);`
+
+* Reads a file line by line: `ssize_t lineread(int fd, char *buf, size_t sz);`
+
+* Tokenize string: `char *next_token(char **str_ptr, const char *delim);`
+
+* Draws percentage bar: `void draw_percbar(char *buf, double frac);`
+
+* Maps ID numbers (UID) associated with running processes to corresponding username: `void uid_to_uname(char *name_buf, uid_t uid);`
+
 
 To compile and run:
 
