@@ -20,15 +20,13 @@
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
     LOGP("Getting the hostname\n");
-    //opens path
     int fd = open_path(proc_dir, "sys/kernel/hostname");
-    //error checking
     if (fd == -1) {
         perror("open_path");
         return -1;
     }
-    //
-    ssize_t read_sz = lineread(fd, hostname_buf, buf_sz);
+
+    ssize_t read_sz = one_lineread(fd, hostname_buf, buf_sz, "\n");
     if (read_sz == -1) {
         return -1;
     }
@@ -48,7 +46,7 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
         return -1;
     }    
     
-    ssize_t read_sz = lineread(fd, version_buf, buf_sz);
+    ssize_t read_sz = one_lineread(fd, version_buf, buf_sz, "\n");
     if (read_sz == -1) {
         return -1;
     }
@@ -264,9 +262,8 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
         char *end_ptr;
         if (strstr(line, "MemTotal:")) {
             LOG("LINE = %s\n", line);
+            next_token(&next_tok, " ");
             curr_tok = next_token(&next_tok, " ");
-            curr_tok = next_token(&next_tok, " ");
-            // size_t mem_total_loc = strcspn(line, )
             mem_total = strtod(curr_tok, &end_ptr);
             //convert to GiB
             mem_total = mem_total / 1024 / 1024;
@@ -275,15 +272,12 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
         }
         if (strstr(line, "MemAvailable:"))  {
             LOG("LINE = %s\n", line);
-            curr_tok = next_token(&next_tok, " ");
+            next_token(&next_tok, " ");
             curr_tok = next_token(&next_tok, " ");
             mem_available = strtod(curr_tok, &end_ptr);
             //convert to GiB
             mem_available = mem_available / 1024 / 1024;
             LOG("MEM AVAIL = %f\n", mem_available);
-            // if (mstats.total - mem_available < 0) {
-            //     return mstats;
-            // }
         }
     }   
     mstats.used = mstats.total - mem_available;
@@ -292,32 +286,148 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     return mstats;
 }
 
-struct task_stats *pfs_create_tstats()
-{
-    struct task_stats *ts = calloc(1, sizeof(struct task_stats));
-    if (ts != NULL) {
-        ts->total = 0;
-        ts->running = 0;
-        ts->waiting = 0;
-        ts->sleeping = 0;
-        ts->stopped = 0;
-        ts->zombie = 0;
+struct task_stats *pfs_create_tstats() {
+    struct task_stats *tstats = calloc(1, sizeof(struct task_stats));
 
-        ts->active_tasks = calloc(1, sizeof(struct task_info));
-    }
-
-    return ts;
+    return tstats;
 }
 
-void pfs_destroy_tstats(struct task_stats *tstats)
-{
+void pfs_destroy_tstats(struct task_stats *tstats) {
     //free active tasks
     free(tstats->active_tasks);
     //free tstats
     free(tstats);
 }
 
-int pfs_tasks(char *proc_dir, struct task_stats *tstats)
-{
+int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
+    int tasks = 0;
+    int running = 0;
+    int waiting = 0;
+    int sleeping = 0; 
+    int stopped = 0;
+    int zombie = 0; 
+
+    DIR *directory = opendir(proc_dir);
+    if (directory == NULL) {
+        perror("opendir");
+        return -1;
+    }
+
+    struct dirent *entry;
+    while ((entry = readdir(directory)) != NULL) {
+        if ((entry->d_type == DT_DIR) && isdigit(*(entry->d_name))) {
+            ++tasks;
+        }
+    }
+    closedir(directory);
+
+    //reallocating memory for active tasks based on task no.
+    tstats->active_tasks = (struct task_info*)realloc(tstats->active_tasks, sizeof(struct task_info)*tasks); 
+
+    //error checking
+    if(tstats->active_tasks == NULL) {
+        return EXIT_FAILURE;
+    }
+
+    int uid;
+    char line[1000];
+    char task_name[26];
+    char task_state[13];
+    int i = 0;
+
+    directory = opendir(proc_dir);
+    while ((entry = readdir(directory)) != NULL) {
+
+        if ((entry->d_type == DT_DIR) && isdigit(*(entry->d_name))) {
+            char direct[1024];
+         
+            snprintf(direct, 1024, "%s/%s/status", proc_dir, entry->d_name);
+
+            int fd = open(direct, O_RDONLY);
+
+                ssize_t read_sz = 0;    
+                while ((read_sz = lineread(fd, line, 1000)) > 0) {
+                    if (strstr(line, "Name:")) {
+                        char *next_tok = line;
+                        next_token(&next_tok, " \t\n");
+                        strcpy(task_name, next_token(&next_tok, " \t\n"));
+                    }
+                    else if (strstr(line, "State:")) {
+                        char *next_tok = line;
+                        next_token(&next_tok, "\t");
+                        char symbol = *(next_token(&next_tok, " "));
+                        strcpy(task_state, next_token(&next_tok, "()"));
+                        if (symbol == 'T') {
+                            stopped++; 
+                        }
+                        else if (symbol == 'S' || symbol == 'I') {
+                            sleeping++;
+                        }
+                        else if (symbol == 'R') {
+                            running++;             
+                        }
+                        else if (symbol == 'Z') {
+                            zombie++;                       
+                        }
+                        else if (symbol == 'D') {
+                            waiting++;
+                        }
+                    }
+                    else if (strstr(line, "Uid:")) {
+                        char *next_tok = line;
+                        char *curr_tok;
+                        curr_tok = next_token(&next_tok, " \t\n");
+                        next_token(&next_tok, " \t\n");
+                        next_token(&next_tok, " \t\n");
+                        uid = atoi(curr_tok);
+                    }  
+                }
+
+                close(fd);
+
+                if (!strcmp(task_state, "running")) {
+                    tstats->active_tasks[i].pid = atoi(entry->d_name);
+                    tstats->active_tasks[i].uid = uid;
+                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strcpy(tstats->active_tasks[i].state, task_state);
+                    tstats->active_tasks[i].name[25] = '\0';
+                    i++;
+                }
+                else if (!strcmp(task_state, "disk sleep")) {
+                    tstats->active_tasks[i].pid = atoi(entry->d_name);
+                    tstats->active_tasks[i].uid = uid;
+                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strcpy(tstats->active_tasks[i].state, task_state);
+                    tstats->active_tasks[i].name[25] = '\0';
+                    i++;
+                }
+                else if (!strcmp(task_state, "stopped") || !strcmp(task_state, "tracing stop")) {
+                    tstats->active_tasks[i].pid = atoi(entry->d_name);
+                    tstats->active_tasks[i].uid = uid;
+                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strcpy(tstats->active_tasks[i].state, task_state);
+                    tstats->active_tasks[i].name[25] = '\0';
+                    i++;
+                } 
+                else if (!strcmp(task_state, "zombie")) {
+                    tstats->active_tasks[i].pid = atoi(entry->d_name);
+                    tstats->active_tasks[i].uid = uid;
+                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strcpy(tstats->active_tasks[i].state, task_state);
+                    tstats->active_tasks[i].name[25] = '\0';
+                    i++;
+                }
+        }
+    }
+
+    closedir(directory); 
+
+    tstats->total = tasks; 
+    tstats->running = running;
+    tstats->waiting = waiting;
+    tstats->sleeping = sleeping;
+    tstats->stopped = stopped;
+    tstats->zombie = zombie;
+  
     return 0;
 }
