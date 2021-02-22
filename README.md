@@ -14,26 +14,26 @@ The program displays a summary of useful information of the system by reading th
 
 Here is a list of methods that reads the different contents of `\proc`:
 
-Load average every one, five, and fifteen minutes: 
+***Load average every one, five, and fifteen minutes: **
 `struct load_avg {
     double one;
     double five;
     double fifteen;
 };`
 
-CPU information to check cpu usage: 
+**CPU information to check cpu usage: **
 `struct cpu_stats {
     long idle;
     long total;
 };`
 
-Memory information to check memory usage: 
+**Memory information to check memory usage: **
 `struct mem_stats {
     double used;
     double total;
 };`
 
-Task statistics: 
+**Task statistics: **
 `struct task_stats {
     unsigned int total;
     unsigned int running;
