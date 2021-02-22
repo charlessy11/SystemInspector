@@ -2,7 +2,12 @@
 
 See: https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html 
 
-About This Project:
+**About This Program:**
+
+The System Inspector Program inspects the system it runs on and displays a summary of useful information of the system by reading the contents of `proc`. It behaves somewhat similar to the ```top``` command found in many Unix-like operating systems which is used to show the Linux processes. Similarly, the two provide a dynamic real-time view of the running system.
+
+**How It Works:**
+
 
 
 To compile and run:
