@@ -4,7 +4,7 @@ See: https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html
 
 **About This Program:**
 
-The System Inspector Program inspects the system it runs on and displays a summary of useful information of the system. It behaves somewhat similar to the `top` command found in many Unix-like operating systems which is used to show the Linux processes. Similarly, the two provide a dynamic real-time view of the running system.
+The System Inspector Program implements a Unix utility that inspects the system it runs on and displays a summary of useful information of the system to the user. It behaves somewhat similar to the `top` command found in many Unix-like operating systems which is used to show the Linux processes. Similarly, the two provide a dynamic real-time view of the running system.
 
 **How It Works:**
 
