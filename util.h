@@ -44,7 +44,7 @@ ssize_t lineread(int fd, char *buf, size_t sz);
 * @param str_ptr point of tokenization
 * @param delim deliminator
 *
-* @return amount of bytes
+* @return token
 */
 char *next_token(char **str_ptr, const char *delim);
 
@@ -54,7 +54,6 @@ char *next_token(char **str_ptr, const char *delim);
 * @param buf stores information
 * @param frac amount of usage
 *
-* @return amount of bytes
 */
 void draw_percbar(char *buf, double frac);
 
@@ -64,7 +63,6 @@ void draw_percbar(char *buf, double frac);
 * @param name_buf stores names
 * @param uid the uid
 *
-* @return amount of bytes
 */
 void uid_to_uname(char *name_buf, uid_t uid);
 

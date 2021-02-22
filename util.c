@@ -68,7 +68,6 @@ ssize_t lineread(int fd, char *buf, size_t sz) {
 			}
 	    }
     }    
-
     return counter;
 }
 
