@@ -14,7 +14,7 @@ The program displays a summary of useful information of the system by reading th
 
 Here is a list of methods that reads the different contents of `\proc`:
 
-***Load average every one, five, and fifteen minutes: **
+**Load average every one, five, and fifteen minutes: **
 `struct load_avg {
     double one;
     double five;
@@ -41,11 +41,10 @@ Here is a list of methods that reads the different contents of `\proc`:
     unsigned int sleeping;
     unsigned int stopped;
     unsigned int zombie;
-
     struct task_info *active_tasks;
 };`
 
-Task information: 
+**Task information: **
 `struct task_info {
     pid_t pid;
     uid_t uid;
@@ -53,22 +52,22 @@ Task information:
     char state[13];
 };`
 
-Retrieves hostname of the machine: 
+**Retrieves hostname of the machine: **
 `int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz);`
 
-Retrieves kernel version of the machine: 
+**Retrieves kernel version of the machine: **
 `int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz);`
 
-Retrieves cpu model name of the machine: 
+**Retrieves cpu model name of the machine: **
 `int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz);`
 
-Sums up the number of processing units of the machine: 
+**Sums up the number of processing units of the machine: **
 `int pfs_cpu_units(char *proc_dir);`
 
-Retrieves uptime(in seconds) of the machine: 
+**Retrieves uptime(in seconds) of the machine: **
 `double pfs_uptime(char *proc_dir);`
-
-Formats uptime(in seconds) to days, hours, minutes, and seconds: 
+**
+Formats uptime(in seconds) to days, hours, minutes, and seconds: **
 `int pfs_format_uptime(double time, char *uptime_buf);`
 
 To compile and run:
