@@ -14,6 +14,63 @@ The program displays a summary of useful information of the system by reading th
 
 Here is a list of methods that reads the different contents of `\proc`:
 
+Load average every one, five, and fifteen minutes
+`struct load_avg {
+    double one;
+    double five;
+    double fifteen;
+};`
+
+CPU information to check cpu usage
+`struct cpu_stats {
+    long idle;
+    long total;
+};`
+
+Memory information to check memory usage
+`struct mem_stats {
+    double used;
+    double total;
+};`
+
+Task statistics
+`struct task_stats {
+    unsigned int total;
+    unsigned int running;
+    unsigned int waiting;
+    unsigned int sleeping;
+    unsigned int stopped;
+    unsigned int zombie;
+
+    struct task_info *active_tasks;
+};`
+
+Task information
+`struct task_info {
+    pid_t pid;
+    uid_t uid;
+    char name[26];
+    char state[13];
+};`
+
+Retrieves hostname of the machine
+`int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz);`
+
+Retrieves kernel version of the machine
+`int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz);`
+
+Retrieves cpu model name of the machine
+`int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz);`
+
+Sums up the number of processing units of the machine
+`int pfs_cpu_units(char *proc_dir);`
+
+Retrieves uptime(in seconds) of the machine
+`double pfs_uptime(char *proc_dir);`
+
+* Formats uptime(in seconds) to days, hours, minutes, and seconds
+`int pfs_format_uptime(double time, char *uptime_buf);`
+
 To compile and run:
 
 ```bash
