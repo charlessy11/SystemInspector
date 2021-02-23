@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="display_8h" kind="file" language="C++">
+    <compoundname>display.h</compoundname>
+    <includes local="no">stdbool.h</includes>
+    <includedby refid="display_8c" local="yes">display.c</includedby>
+    <includedby refid="inspector_8c" local="yes">inspector.c</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>stdbool.h</label>
+      </node>
+      <node id="1">
+        <label>display.h</label>
+        <link refid="display_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>inspector.c</label>
+        <link refid="inspector_8c"/>
+      </node>
+      <node id="1">
+        <label>display.h</label>
+        <link refid="display_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="display_8h_1a1e2f83d8dcc4bcb4fce6760ba7553f13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void display_init</definition>
+        <argsstring>(bool enable_curses)</argsstring>
+        <name>display_init</name>
+        <param>
+          <type>bool</type>
+          <declname>enable_curses</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.h" line="12" column="6" bodyfile="display.c" bodystart="35" bodyend="72" declfile="display.h" declline="12" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="display_8h_1a2e8e9eb4a561c166c8bb86fe71894f43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void display_refresh</definition>
+        <argsstring>(char *procfs_loc)</argsstring>
+        <name>display_refresh</name>
+        <param>
+          <type>char *</type>
+          <declname>procfs_loc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.h" line="13" column="6" bodyfile="display.c" bodystart="81" bodyend="173" declfile="display.h" declline="13" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="display_8h_1ab12317f9443e7b4dd72f79cfc8324164" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool display_quit</definition>
+        <argsstring>(void)</argsstring>
+        <name>display_quit</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.h" line="14" column="6" bodyfile="display.c" bodystart="175" bodyend="183" declfile="display.h" declline="14" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="display_8h_1a456c3918184a2900f154a31216df2d70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void display_stop</definition>
+        <argsstring>(void)</argsstring>
+        <name>display_stop</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.h" line="15" column="6" bodyfile="display.c" bodystart="185" bodyend="190" declfile="display.h" declline="15" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Handles text-based UI functionality. </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_DISPLAY_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_DISPLAY_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_init(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_curses);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_refresh(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*procfs_loc);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>display_quit(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_stop(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="display.h"/>
+  </compounddef>
+</doxygen>

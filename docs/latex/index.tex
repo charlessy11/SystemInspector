@@ -1,0 +1,73 @@
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+ See\+: \href{https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html}{\texttt{ https\+://www.\+cs.\+usfca.\+edu/$\sim$mmalensek/cs326/assignments/project-\/1.\+html}}
+
+{\bfseries{About This Program\+:}}
+
+The System Inspector Program implements a Unix utility that inspects the system it runs on and displays a summary of useful information of the system to the user. It behaves somewhat similar to the {\ttfamily top} command found in many Unix-\/like operating systems which is used to show the Linux processes. Similarly, the two provide a dynamic real-\/time view of the running system.
+
+{\bfseries{How It Works\+:}}
+
+The program displays a summary of useful information of the system by reading the contents of {\ttfamily \textbackslash{}proc}.
+
+{\bfseries{How It\textquotesingle{}s Built\+:}}
+
+Here is a list of methods that reads the different contents of {\ttfamily \textbackslash{}proc}\+:
+
+
+\begin{DoxyItemize}
+\item Load average every one, five, and fifteen minutes\+: \`{}struct \mbox{\hyperlink{structload__avg}{load\+\_\+avg}} \{ double one; double five; double fifteen; \};\`{}
+\item CPU information to check cpu usage\+: \`{}struct \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}} \{ long idle; long total; \};\`{}
+\item Memory information to check memory usage\+: \`{}struct \mbox{\hyperlink{structmem__stats}{mem\+\_\+stats}} \{ double used; double total; \};\`{}
+\item Task statistics\+: \`{}struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} \{ unsigned int total; unsigned int running; unsigned int waiting; unsigned int sleeping; unsigned int stopped; unsigned int zombie; struct \mbox{\hyperlink{structtask__info}{task\+\_\+info}} $\ast$active\+\_\+tasks; \};\`{}
+\item Task information\+: \`{}struct \mbox{\hyperlink{structtask__info}{task\+\_\+info}} \{ pid\+\_\+t pid; uid\+\_\+t uid; char name\mbox{[}26\mbox{]}; char state\mbox{[}13\mbox{]}; \};\`{}
+\item Retrieves hostname of the machine\+: {\ttfamily int \mbox{\hyperlink{procfs_8h_acb1112f87eb6d7023b4bc2adccebb75e}{pfs\+\_\+hostname(char $\ast$proc\+\_\+dir, char $\ast$hostname\+\_\+buf, size\+\_\+t buf\+\_\+sz)}};}
+\item Retrieves kernel version of the machine\+: {\ttfamily int \mbox{\hyperlink{procfs_8h_aa2daa2378b2816f378f7d8d1cad39371}{pfs\+\_\+kernel\+\_\+version(char $\ast$proc\+\_\+dir, char $\ast$version\+\_\+buf, size\+\_\+t buf\+\_\+sz)}};}
+\item Retrieves cpu model name of the machine\+: {\ttfamily int \mbox{\hyperlink{procfs_8h_aa9d05ac622f7322719bbcf8302c682ad}{pfs\+\_\+cpu\+\_\+model(char $\ast$proc\+\_\+dir, char $\ast$model\+\_\+buf, size\+\_\+t buf\+\_\+sz)}};}
+\item Sums up the number of processing units of the machine\+: {\ttfamily int \mbox{\hyperlink{procfs_8h_a9b207290dee3e4fc725a6800ab2813d6}{pfs\+\_\+cpu\+\_\+units(char $\ast$proc\+\_\+dir)}};}
+\item Retrieves uptime(in seconds) of the machine\+: {\ttfamily double \mbox{\hyperlink{procfs_8h_a22f70e07728198887b6f062716183058}{pfs\+\_\+uptime(char $\ast$proc\+\_\+dir)}};}
+\item Formats uptime(in seconds) to days, hours, minutes, and seconds\+: {\ttfamily int \mbox{\hyperlink{procfs_8h_a2b539d023054cb32a82cc19e9fe1d977}{pfs\+\_\+format\+\_\+uptime(double time, char $\ast$uptime\+\_\+buf)}};}
+\item Retrieves load average of the machine\+: {\ttfamily struct \mbox{\hyperlink{structload__avg}{load\+\_\+avg}} \mbox{\hyperlink{procfs_8h_ad7cd36585e7dc0dd239d622c60e1df69}{pfs\+\_\+load\+\_\+avg(char $\ast$proc\+\_\+dir)}};}
+\item Retrieves cpu usage of the machine\+: {\ttfamily double \mbox{\hyperlink{procfs_8h_a866cac2f8014b4c83f23243ab0e01ab3}{pfs\+\_\+cpu\+\_\+usage(char $\ast$procfs\+\_\+dir, struct cpu\+\_\+stats $\ast$prev, struct cpu\+\_\+stats $\ast$curr)}};}
+\item Retrieves memory usage of the machine\+: {\ttfamily struct \mbox{\hyperlink{structmem__stats}{mem\+\_\+stats}} \mbox{\hyperlink{procfs_8h_a6cde96a5ca78eb0d37fb4c8da3c7e0b4}{pfs\+\_\+mem\+\_\+usage(char $\ast$procfs\+\_\+dir)}};}
+\item Creates memory for \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} structs\+: {\ttfamily struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} $\ast$pfs\+\_\+create\+\_\+tstats();}
+\item Frees memory for \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} structs\+: {\ttfamily void \mbox{\hyperlink{procfs_8h_ace1568af21fee77d1ce8b68ac7460e8c}{pfs\+\_\+destroy\+\_\+tstats(struct task\+\_\+stats $\ast$tstats)}};}
+\item Retrieves tasks info of the machine\+: {\ttfamily int \mbox{\hyperlink{procfs_8h_a78c77e940f997164cfe044717b5ce2e1}{pfs\+\_\+tasks(char $\ast$proc\+\_\+dir, struct task\+\_\+stats $\ast$tstats)}};}
+\end{DoxyItemize}
+
+Here is a list of helper methods\+:
+
+
+\begin{DoxyItemize}
+\item Opens specified path\+: {\ttfamily int open\+\_\+path(char $\ast$proc\+\_\+dir, char $\ast$path);}
+\item Reads one line of file\+: {\ttfamily ssize\+\_\+t one\+\_\+lineread(int fd, char $\ast$buf, size\+\_\+t sz, char $\ast$delim);}
+\item Reads a file line by line\+: {\ttfamily ssize\+\_\+t lineread(int fd, char $\ast$buf, size\+\_\+t sz);}
+\item Tokenize string\+: {\ttfamily char $\ast$next\+\_\+token(char $\ast$$\ast$str\+\_\+ptr, const char $\ast$delim);}
+\item Draws percentage bar\+: {\ttfamily void draw\+\_\+percbar(char $\ast$buf, double frac);}
+\item Maps ID numbers (UID) associated with running processes to corresponding username\+: {\ttfamily void uid\+\_\+to\+\_\+uname(char $\ast$name\+\_\+buf, uid\+\_\+t uid);}
+\end{DoxyItemize}
+
+To compile and run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+\DoxyCodeLine{./inspector}
+
+\end{DoxyCode}
+\hypertarget{index_autotoc_md1}{}\doxysection{Testing}\label{index_autotoc_md1}
+To execute the test cases, use {\ttfamily make test}. To pull in updated test cases, run {\ttfamily make testupdate}. You can also run a specific test case instead of all of them\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\# Run all test cases:}
+\DoxyCodeLine{make test}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Run a specific test case:}
+\DoxyCodeLine{make test run=4}
+\DoxyCodeLine{}
+\DoxyCodeLine{\# Run a few specific test cases (4, 8, and 12 in this case):}
+\DoxyCodeLine{make test run='4 8 12'}
+
+\end{DoxyCode}
+ 

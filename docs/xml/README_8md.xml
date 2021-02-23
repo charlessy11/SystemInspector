@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="README_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Project<sp/>1:<sp/>System<sp/>Inspector</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">See:<sp/>https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**About<sp/>This<sp/>Program:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>System<sp/>Inspector<sp/>Program<sp/>implements<sp/>a<sp/>Unix<sp/>utility<sp/>that<sp/>inspects<sp/>the<sp/>system<sp/>it<sp/>runs<sp/>on<sp/>and<sp/>displays<sp/>a<sp/>summary<sp/>of<sp/>useful<sp/>information<sp/>of<sp/>the<sp/>system<sp/>to<sp/>the<sp/>user.<sp/>It<sp/>behaves<sp/>somewhat<sp/>similar<sp/>to<sp/>the<sp/>`top`<sp/>command<sp/>found<sp/>in<sp/>many<sp/>Unix-like<sp/>operating<sp/>systems<sp/>which<sp/>is<sp/>used<sp/>to<sp/>show<sp/>the<sp/>Linux<sp/>processes.<sp/>Similarly,<sp/>the<sp/>two<sp/>provide<sp/>a<sp/>dynamic<sp/>real-time<sp/>view<sp/>of<sp/>the<sp/>running<sp/>system.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**How<sp/>It<sp/>Works:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>program<sp/>displays<sp/>a<sp/>summary<sp/>of<sp/>useful<sp/>information<sp/>of<sp/>the<sp/>system<sp/>by<sp/>reading<sp/>the<sp/>contents<sp/>of<sp/>`\proc`.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**How<sp/>It&apos;s<sp/>Built:**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Here<sp/>is<sp/>a<sp/>list<sp/>of<sp/>methods<sp/>that<sp/>reads<sp/>the<sp/>different<sp/>contents<sp/>of<sp/>`\proc`:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Load<sp/>average<sp/>every<sp/>one,<sp/>five,<sp/>and<sp/>fifteen<sp/>minutes:<sp/></highlight></codeline>
+<codeline><highlight class="normal">`struct<sp/>load_avg<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>double<sp/>one;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>double<sp/>five;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>double<sp/>fifteen;</highlight></codeline>
+<codeline><highlight class="normal">};`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>CPU<sp/>information<sp/>to<sp/>check<sp/>cpu<sp/>usage:<sp/></highlight></codeline>
+<codeline><highlight class="normal">`struct<sp/>cpu_stats<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>long<sp/>idle;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>long<sp/>total;</highlight></codeline>
+<codeline><highlight class="normal">};`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Memory<sp/>information<sp/>to<sp/>check<sp/>memory<sp/>usage:<sp/></highlight></codeline>
+<codeline><highlight class="normal">`struct<sp/>mem_stats<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>double<sp/>used;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>double<sp/>total;</highlight></codeline>
+<codeline><highlight class="normal">};`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Task<sp/>statistics:<sp/></highlight></codeline>
+<codeline><highlight class="normal">`struct<sp/>task_stats<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>unsigned<sp/>int<sp/>total;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>unsigned<sp/>int<sp/>running;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>unsigned<sp/>int<sp/>waiting;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>unsigned<sp/>int<sp/>sleeping;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>unsigned<sp/>int<sp/>stopped;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>unsigned<sp/>int<sp/>zombie;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>struct<sp/>task_info<sp/>*active_tasks;</highlight></codeline>
+<codeline><highlight class="normal">};`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Task<sp/>information:<sp/></highlight></codeline>
+<codeline><highlight class="normal">`struct<sp/>task_info<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>pid_t<sp/>pid;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>uid_t<sp/>uid;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>char<sp/>name[26];</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>char<sp/>state[13];</highlight></codeline>
+<codeline><highlight class="normal">};`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>hostname<sp/>of<sp/>the<sp/>machine:<sp/>`int<sp/>pfs_hostname(char<sp/>*proc_dir,<sp/>char<sp/>*hostname_buf,<sp/>size_t<sp/>buf_sz);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>kernel<sp/>version<sp/>of<sp/>the<sp/>machine:<sp/>`int<sp/>pfs_kernel_version(char<sp/>*proc_dir,<sp/>char<sp/>*version_buf,<sp/>size_t<sp/>buf_sz);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>cpu<sp/>model<sp/>name<sp/>of<sp/>the<sp/>machine:<sp/>`int<sp/>pfs_cpu_model(char<sp/>*proc_dir,<sp/>char<sp/>*model_buf,<sp/>size_t<sp/>buf_sz);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Sums<sp/>up<sp/>the<sp/>number<sp/>of<sp/>processing<sp/>units<sp/>of<sp/>the<sp/>machine:<sp/>`int<sp/>pfs_cpu_units(char<sp/>*proc_dir);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>uptime(in<sp/>seconds)<sp/>of<sp/>the<sp/>machine:<sp/>`double<sp/>pfs_uptime(char<sp/>*proc_dir);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Formats<sp/>uptime(in<sp/>seconds)<sp/>to<sp/>days,<sp/>hours,<sp/>minutes,<sp/>and<sp/>seconds:<sp/>`int<sp/>pfs_format_uptime(double<sp/>time,<sp/>char<sp/>*uptime_buf);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>load<sp/>average<sp/>of<sp/>the<sp/>machine:<sp/>`struct<sp/>load_avg<sp/>pfs_load_avg(char<sp/>*proc_dir);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>cpu<sp/>usage<sp/>of<sp/>the<sp/>machine:<sp/>`double<sp/>pfs_cpu_usage(char<sp/>*procfs_dir,<sp/>struct<sp/>cpu_stats<sp/>*prev,<sp/>struct<sp/>cpu_stats<sp/>*curr);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>memory<sp/>usage<sp/>of<sp/>the<sp/>machine:<sp/>`struct<sp/>mem_stats<sp/>pfs_mem_usage(char<sp/>*procfs_dir);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Creates<sp/>memory<sp/>for<sp/>task_stats<sp/>structs:<sp/>`struct<sp/>task_stats<sp/>*pfs_create_tstats();`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Frees<sp/>memory<sp/>for<sp/>task_stats<sp/>structs:<sp/>`void<sp/>pfs_destroy_tstats(struct<sp/>task_stats<sp/>*tstats);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieves<sp/>tasks<sp/>info<sp/>of<sp/>the<sp/>machine:<sp/>`int<sp/>pfs_tasks(char<sp/>*proc_dir,<sp/>struct<sp/>task_stats<sp/>*tstats);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Here<sp/>is<sp/>a<sp/>list<sp/>of<sp/>helper<sp/>methods:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Opens<sp/>specified<sp/>path:<sp/>`int<sp/>open_path(char<sp/>*proc_dir,<sp/>char<sp/>*path);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Reads<sp/>one<sp/>line<sp/>of<sp/>file:<sp/>`ssize_t<sp/>one_lineread(int<sp/>fd,<sp/>char<sp/>*buf,<sp/>size_t<sp/>sz,<sp/>char<sp/>*delim);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Reads<sp/>a<sp/>file<sp/>line<sp/>by<sp/>line:<sp/>`ssize_t<sp/>lineread(int<sp/>fd,<sp/>char<sp/>*buf,<sp/>size_t<sp/>sz);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Tokenize<sp/>string:<sp/>`char<sp/>*next_token(char<sp/>**str_ptr,<sp/>const<sp/>char<sp/>*delim);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Draws<sp/>percentage<sp/>bar:<sp/>`void<sp/>draw_percbar(char<sp/>*buf,<sp/>double<sp/>frac);`</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Maps<sp/>ID<sp/>numbers<sp/>(UID)<sp/>associated<sp/>with<sp/>running<sp/>processes<sp/>to<sp/>corresponding<sp/>username:<sp/>`void<sp/>uid_to_uname(char<sp/>*name_buf,<sp/>uid_t<sp/>uid);`</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>compile<sp/>and<sp/>run:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```bash</highlight></codeline>
+<codeline><highlight class="normal">make</highlight></codeline>
+<codeline><highlight class="normal">./inspector</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Testing</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">To<sp/>execute<sp/>the<sp/>test<sp/>cases,<sp/>use<sp/>`make<sp/>test`.<sp/>To<sp/>pull<sp/>in<sp/>updated<sp/>test<sp/>cases,<sp/>run<sp/>`make<sp/>testupdate`.<sp/>You<sp/>can<sp/>also<sp/>run<sp/>a<sp/>specific<sp/>test<sp/>case<sp/>instead<sp/>of<sp/>all<sp/>of<sp/>them:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>all<sp/>test<sp/>cases:</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>a<sp/>specific<sp/>test<sp/>case:</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test<sp/>run=4</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>a<sp/>few<sp/>specific<sp/>test<sp/>cases<sp/>(4,<sp/>8,<sp/>and<sp/>12<sp/>in<sp/>this<sp/>case):</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test<sp/>run=&apos;4<sp/>8<sp/>12&apos;</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+    </programlisting>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

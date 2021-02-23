@@ -1,0 +1,481 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="display_8c" kind="file" language="C++">
+    <compoundname>display.c</compoundname>
+    <includes local="no">fcntl.h</includes>
+    <includes local="no">limits.h</includes>
+    <includes local="no">math.h</includes>
+    <includes local="no">ncurses.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">unistd.h</includes>
+    <includes local="no">signal.h</includes>
+    <includes local="no">sys/types.h</includes>
+    <includes local="no">pwd.h</includes>
+    <includes refid="logger_8h" local="yes">logger.h</includes>
+    <includes refid="display_8h" local="yes">display.h</includes>
+    <includes refid="procfs_8h" local="yes">procfs.h</includes>
+    <includes refid="util_8h" local="yes">util.h</includes>
+    <incdepgraph>
+      <node id="14">
+        <label>stdbool.h</label>
+      </node>
+      <node id="16">
+        <label>util.h</label>
+        <link refid="util_8h_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fcntl.h</label>
+      </node>
+      <node id="3">
+        <label>limits.h</label>
+      </node>
+      <node id="10">
+        <label>sys/types.h</label>
+      </node>
+      <node id="7">
+        <label>string.h</label>
+      </node>
+      <node id="8">
+        <label>unistd.h</label>
+      </node>
+      <node id="9">
+        <label>signal.h</label>
+      </node>
+      <node id="12">
+        <label>logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>math.h</label>
+      </node>
+      <node id="15">
+        <label>procfs.h</label>
+        <link refid="procfs_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ncurses.h</label>
+      </node>
+      <node id="11">
+        <label>pwd.h</label>
+      </node>
+      <node id="1">
+        <label>display.c</label>
+        <link refid="display_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>stdio.h</label>
+      </node>
+      <node id="13">
+        <label>display.h</label>
+        <link refid="display_8h"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="display_8c_1afa773773eb0a45bfce33d4617dfc5ad6" prot="public" static="no">
+        <name>DISP_PRINT</name>
+        <param><defname>y</defname></param>
+        <param><defname>x</defname></param>
+        <param><defname>fmt</defname></param>
+        <param><defname>...</defname></param>
+        <initializer>    do { \
+        if (use_curses) { \
+            mvprintw(y, x, fmt, __VA_ARGS__); \
+            clrtoeol(); \
+        } else { \
+            printf(fmt &quot;\n&quot;, __VA_ARGS__); \
+        } \
+    } while (0)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="18" column="9" bodyfile="display.c" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="display_8c_1a454f20ff81fbabee07b2ce73959a6475" prot="public" static="yes" mutable="no">
+        <type>WINDOW *</type>
+        <definition>WINDOW* scr</definition>
+        <argsstring></argsstring>
+        <name>scr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="30" column="15" bodyfile="display.c" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="display_8c_1a7adc77618ddc9e96a5d706b31cdb0055" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int win_x</definition>
+        <argsstring></argsstring>
+        <name>win_x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="31" column="12" bodyfile="display.c" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="display_8c_1ab577378f1d1499870c2e7c66d8e3680b" prot="public" static="yes" mutable="no">
+        <type>int</type>
+        <definition>int win_y</definition>
+        <argsstring></argsstring>
+        <name>win_y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="32" column="12" bodyfile="display.c" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="display_8c_1a8cef096be1c4f919b5fec39602902286" prot="public" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool use_curses</definition>
+        <argsstring></argsstring>
+        <name>use_curses</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="33" column="13" bodyfile="display.c" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="display_8c_1ab9a03a819137f27005203cb0dea3c7fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void display_separator</definition>
+        <argsstring>(void)</argsstring>
+        <name>display_separator</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="74" column="6" bodyfile="display.c" bodystart="74" bodyend="79" declfile="display.c" declline="28" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="display_8c_1a1e2f83d8dcc4bcb4fce6760ba7553f13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void display_init</definition>
+        <argsstring>(bool enable_curses)</argsstring>
+        <name>display_init</name>
+        <param>
+          <type>bool</type>
+          <declname>enable_curses</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="35" column="6" bodyfile="display.c" bodystart="35" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="display_8c_1a2e8e9eb4a561c166c8bb86fe71894f43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void display_refresh</definition>
+        <argsstring>(char *procfs_loc)</argsstring>
+        <name>display_refresh</name>
+        <param>
+          <type>char *</type>
+          <declname>procfs_loc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="81" column="6" bodyfile="display.c" bodystart="81" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="display_8c_1ab12317f9443e7b4dd72f79cfc8324164" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool display_quit</definition>
+        <argsstring>(void)</argsstring>
+        <name>display_quit</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="175" column="6" bodyfile="display.c" bodystart="175" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="display_8c_1a456c3918184a2900f154a31216df2d70" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void display_stop</definition>
+        <argsstring>(void)</argsstring>
+        <name>display_stop</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="display.c" line="185" column="6" bodyfile="display.c" bodystart="185" bodyend="190"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;fcntl.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;limits.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;math.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ncurses.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unistd.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;signal.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/types.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;pwd.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="logger_8h" kindref="compound">logger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="display_8h" kindref="compound">display.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="procfs_8h" kindref="compound">procfs.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;util.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DISP_PRINT(y,<sp/>x,<sp/>fmt,<sp/>...)<sp/>\</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>do<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(use_curses)<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="21"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mvprintw(y,<sp/>x,<sp/>fmt,<sp/>__VA_ARGS__);<sp/>\</highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clrtoeol();<sp/>\</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>else<sp/>{<sp/>\</highlight></codeline>
+<codeline lineno="24"><highlight class="preprocessor"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>printf(fmt<sp/>&quot;\n&quot;</highlight><highlight class="normal">,<sp/>__VA_ARGS__);<sp/>\</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>\</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/>while<sp/>(0)<sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_separator(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>WINDOW<sp/>*scr;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>win_x;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>win_y;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_curses<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_init(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_curses)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;Initializing<sp/>the<sp/>display...\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(enable_curses<sp/>==<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;Curses-based<sp/>display<sp/>disabled\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>use_curses<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win_x<sp/>=<sp/>80;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>win_y<sp/>=<sp/>24;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>redirect<sp/>stderr<sp/>to<sp/>inspector.log\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fd<sp/>=<sp/>open(</highlight><highlight class="stringliteral">&quot;inspector.log&quot;</highlight><highlight class="normal">,<sp/>O_RDWR<sp/>|<sp/>O_CREAT<sp/>|<sp/>O_TRUNC,<sp/>0666);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fd<sp/>==<sp/>-1)<sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>perror(</highlight><highlight class="stringliteral">&quot;open&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ret<sp/>=<sp/>dup2(fd,<sp/>fileno(stderr));</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ret<sp/>==<sp/>-1)<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>perror(</highlight><highlight class="stringliteral">&quot;dup2&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>scr<sp/>=<sp/>initscr();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>getmaxyx(scr,<sp/>win_y,<sp/>win_x);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;Created<sp/>curses<sp/>screen.<sp/>Dimensions:<sp/>%d<sp/>x<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>win_x,<sp/>win_y);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Make<sp/>functions<sp/>such<sp/>as<sp/>getch()<sp/>return<sp/>immediately<sp/>without<sp/>waiting<sp/>for</highlight></codeline>
+<codeline lineno="64"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>*<sp/>user<sp/>input:<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>nodelay(scr,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Do<sp/>not<sp/>print<sp/>characters<sp/>typed<sp/>by<sp/>the<sp/>user:<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>noecho();</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Hide<sp/>the<sp/>cursor:<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>curs_set(0);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_separator(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="75"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(use_curses<sp/>==<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>puts(</highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_refresh(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*procfs_loc)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>retval<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>name[HOST_NAME_MAX<sp/>+<sp/>1];</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>retval<sp/>=<sp/><ref refid="procfs_8h_1acb1112f87eb6d7023b4bc2adccebb75e" kindref="member">pfs_hostname</ref>(procfs_loc,<sp/>name,<sp/>HOST_NAME_MAX<sp/>+<sp/>1);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(retval<sp/>==<sp/>-1)<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(name,<sp/></highlight><highlight class="stringliteral">&quot;(UNKNOWN)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>vers[32];</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>retval<sp/>=<sp/><ref refid="procfs_8h_1aa2daa2378b2816f378f7d8d1cad39371" kindref="member">pfs_kernel_version</ref>(procfs_loc,<sp/>vers,<sp/>32);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(retval<sp/>==<sp/>-1)<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(vers,<sp/></highlight><highlight class="stringliteral">&quot;(UNKNOWN)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(0,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;Hostname:<sp/>%s<sp/>|<sp/>Kernel<sp/>Version:<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>name,<sp/>vers);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>cpu_model[128];</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>retval<sp/>=<sp/><ref refid="procfs_8h_1aa9d05ac622f7322719bbcf8302c682ad" kindref="member">pfs_cpu_model</ref>(procfs_loc,<sp/>cpu_model,<sp/>128);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(retval<sp/>==<sp/>-1)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(cpu_model,<sp/></highlight><highlight class="stringliteral">&quot;(UNKNOWN)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>proc_units<sp/>=<sp/><ref refid="procfs_8h_1a9b207290dee3e4fc725a6800ab2813d6" kindref="member">pfs_cpu_units</ref>(procfs_loc);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(1,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;CPU:<sp/>%s,<sp/>Processing<sp/>Units:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>cpu_model,<sp/>proc_units);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>uptime<sp/>=<sp/><ref refid="procfs_8h_1a22f70e07728198887b6f062716183058" kindref="member">pfs_uptime</ref>(procfs_loc);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>uptime_str[1024];</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(uptime<sp/>==<sp/>0.0)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>strcpy(uptime_str,<sp/></highlight><highlight class="stringliteral">&quot;(UNKNOWN)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="procfs_8h_1a2b539d023054cb32a82cc19e9fe1d977" kindref="member">pfs_format_uptime</ref>(uptime,<sp/>uptime_str);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(2,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;Uptime:<sp/>%s&quot;</highlight><highlight class="normal">,<sp/>uptime_str);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>display_separator();</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>lavg<sp/>=<sp/><ref refid="procfs_8h_1ad7cd36585e7dc0dd239d622c60e1df69" kindref="member">pfs_load_avg</ref>(procfs_loc);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(4,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;Load<sp/>Average<sp/>(1/5/15<sp/>min):<sp/>%.2f<sp/>%.2f<sp/>%.2f&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lavg.one,<sp/>lavg.five,<sp/>lavg.fifteen);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>cpu_bar[30]<sp/>=<sp/>{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>prev_cpu;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>curr_cpu;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cpu_perc<sp/>=<sp/><ref refid="procfs_8h_1a866cac2f8014b4c83f23243ab0e01ab3" kindref="member">pfs_cpu_usage</ref>(procfs_loc,<sp/>&amp;prev_cpu,<sp/>&amp;curr_cpu);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>prev_cpu<sp/>=<sp/>curr_cpu;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_percbar(cpu_bar,<sp/>cpu_perc);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(5,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;CPU<sp/>Usage:<sp/><sp/><sp/><sp/>%s&quot;</highlight><highlight class="normal">,<sp/>cpu_bar);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>mem_bar[30]<sp/>=<sp/>{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmem__stats" kindref="compound">mem_stats</ref><sp/>mstats<sp/>=<sp/><ref refid="procfs_8h_1a6cde96a5ca78eb0d37fb4c8da3c7e0b4" kindref="member">pfs_mem_usage</ref>(procfs_loc);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>draw_percbar(mem_bar,<sp/>mstats.used<sp/>/<sp/>mstats.total);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(6,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;Memory<sp/>Usage:<sp/>%s<sp/>(%.1f<sp/>/<sp/>%.1f<sp/>GB)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mem_bar,<sp/>mstats.used,<sp/>mstats.total);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>display_separator();</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*tstats<sp/>=<sp/><ref refid="procfs_8h_1a3a7b8e342feb3d2ae29e01279c18087a" kindref="member">pfs_create_tstats</ref>();</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(tstats<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DISP_PRINT(8,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Tasks:<sp/>(UNKNOWN)&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">goto</highlight><highlight class="normal"><sp/>cleanup;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="procfs_8h_1a78c77e940f997164cfe044717b5ce2e1" kindref="member">pfs_tasks</ref>(procfs_loc,<sp/>tstats);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(8,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;Tasks:<sp/>%d<sp/>total&quot;</highlight><highlight class="normal">,<sp/>tstats-&gt;total);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(9,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%d<sp/>running,<sp/>%d<sp/>waiting,<sp/>%d<sp/>sleeping,<sp/>%d<sp/>stopped,<sp/>%d<sp/>zombie&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;running,</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;waiting,</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;sleeping,</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;stopped,</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;zombie);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>display_separator();</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(11,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%9s<sp/>|<sp/>%25s<sp/>|<sp/>%12s<sp/>|<sp/>%15s&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;PID&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Task<sp/>Name&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;State&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;User&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>DISP_PRINT(12,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%s&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;----------+---------------------------+--------------+-----------------&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>tstats-&gt;total<sp/>-<sp/>tstats-&gt;sleeping;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>uname[16];</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uid_to_uname(uname,<sp/>tstats-&gt;active_tasks[i].uid);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DISP_PRINT(13<sp/>+<sp/>i,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;%9d<sp/>|<sp/>%25s<sp/>|<sp/>%12s<sp/>|<sp/>%15s&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;active_tasks[i].pid,</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;active_tasks[i].name,</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tstats-&gt;active_tasks[i].state,</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uname);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="procfs_8h_1ace1568af21fee77d1ce8b68ac7460e8c" kindref="member">pfs_destroy_tstats</ref>(tstats);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal">cleanup:</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(use_curses<sp/>==<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>clrtobot();</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>refresh();</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>display_quit(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ch<sp/>=<sp/>getch();</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ch<sp/>!=<sp/>ERR<sp/>&amp;&amp;<sp/>ch<sp/>!=<sp/>KEY_RESIZE)<sp/>{</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>display_stop(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="186"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Restore<sp/>the<sp/>cursor:<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/>curs_set(1);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/>endwin();</highlight></codeline>
+<codeline lineno="190"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="display.c"/>
+  </compounddef>
+</doxygen>

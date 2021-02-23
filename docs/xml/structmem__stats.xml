@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structmem__stats" kind="struct" language="C++" prot="public">
+    <compoundname>mem_stats</compoundname>
+    <includes refid="procfs_8h" local="no">procfs.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structmem__stats_1acc5ef7764eb75531982d96e34abe6018" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double mem_stats::used</definition>
+        <argsstring></argsstring>
+        <name>used</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="34" column="12" bodyfile="procfs.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmem__stats_1a0093e7ea21063a2805bc16ca5c935c5c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double mem_stats::total</definition>
+        <argsstring></argsstring>
+        <name>total</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="35" column="12" bodyfile="procfs.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Memory information to check memory usage </para>
+    </detaileddescription>
+    <location file="procfs.h" line="33" column="1" bodyfile="procfs.h" bodystart="33" bodyend="36"/>
+    <listofallmembers>
+      <member refid="structmem__stats_1a0093e7ea21063a2805bc16ca5c935c5c" prot="public" virt="non-virtual"><scope>mem_stats</scope><name>total</name></member>
+      <member refid="structmem__stats_1acc5ef7764eb75531982d96e34abe6018" prot="public" virt="non-virtual"><scope>mem_stats</scope><name>used</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

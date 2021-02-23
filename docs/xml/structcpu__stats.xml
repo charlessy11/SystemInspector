@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structcpu__stats" kind="struct" language="C++" prot="public">
+    <compoundname>cpu_stats</compoundname>
+    <includes refid="procfs_8h" local="no">procfs.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcpu__stats_1a8ee0816cb29cd45bc66a43a13238cba2" prot="public" static="no" mutable="no">
+        <type>long</type>
+        <definition>long cpu_stats::idle</definition>
+        <argsstring></argsstring>
+        <name>idle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="26" column="10" bodyfile="procfs.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcpu__stats_1a6de356656e323c829a0268f3c96eee0c" prot="public" static="no" mutable="no">
+        <type>long</type>
+        <definition>long cpu_stats::total</definition>
+        <argsstring></argsstring>
+        <name>total</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="27" column="10" bodyfile="procfs.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>CPU information to check cpu usage </para>
+    </detaileddescription>
+    <location file="procfs.h" line="25" column="1" bodyfile="procfs.h" bodystart="25" bodyend="28"/>
+    <listofallmembers>
+      <member refid="structcpu__stats_1a8ee0816cb29cd45bc66a43a13238cba2" prot="public" virt="non-virtual"><scope>cpu_stats</scope><name>idle</name></member>
+      <member refid="structcpu__stats_1a6de356656e323c829a0268f3c96eee0c" prot="public" virt="non-virtual"><scope>cpu_stats</scope><name>total</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

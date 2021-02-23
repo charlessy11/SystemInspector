@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+  <compound refid="structcpu__stats" kind="struct"><name>cpu_stats</name>
+    <member refid="structcpu__stats_1a8ee0816cb29cd45bc66a43a13238cba2" kind="variable"><name>idle</name></member>
+    <member refid="structcpu__stats_1a6de356656e323c829a0268f3c96eee0c" kind="variable"><name>total</name></member>
+  </compound>
+  <compound refid="structinspector__opts" kind="struct"><name>inspector_opts</name>
+    <member refid="structinspector__opts_1a4179a88a320d322d68b6b23fa7946668" kind="variable"><name>procfs_loc</name></member>
+    <member refid="structinspector__opts_1a62e5258da4abc415d39e2ae4c1961c55" kind="variable"><name>one_shot</name></member>
+    <member refid="structinspector__opts_1a256eb9fbca11e5039b2b00399924bf03" kind="variable"><name>interval</name></member>
+  </compound>
+  <compound refid="structload__avg" kind="struct"><name>load_avg</name>
+    <member refid="structload__avg_1a9e0af8904aceaad2dfef0568bb2d7fea" kind="variable"><name>one</name></member>
+    <member refid="structload__avg_1a0a01cd30ccda836145b79f3ba955101a" kind="variable"><name>five</name></member>
+    <member refid="structload__avg_1ae672600cd94750a11062e9699b586fa0" kind="variable"><name>fifteen</name></member>
+  </compound>
+  <compound refid="structmem__stats" kind="struct"><name>mem_stats</name>
+    <member refid="structmem__stats_1acc5ef7764eb75531982d96e34abe6018" kind="variable"><name>used</name></member>
+    <member refid="structmem__stats_1a0093e7ea21063a2805bc16ca5c935c5c" kind="variable"><name>total</name></member>
+  </compound>
+  <compound refid="structtask__info" kind="struct"><name>task_info</name>
+    <member refid="structtask__info_1aa4235b38be35cb61638b4a0ee1cb4df8" kind="variable"><name>pid</name></member>
+    <member refid="structtask__info_1a0023ed413458938a6268b87c6291fb14" kind="variable"><name>uid</name></member>
+    <member refid="structtask__info_1a20832eb57e0245ef6cd939adc3be1dfd" kind="variable"><name>name</name></member>
+    <member refid="structtask__info_1a1e6a20838a7a44d550d24e23584c45d9" kind="variable"><name>state</name></member>
+  </compound>
+  <compound refid="structtask__stats" kind="struct"><name>task_stats</name>
+    <member refid="structtask__stats_1a94c67c04a275e82c99a309f8b4aa9af3" kind="variable"><name>total</name></member>
+    <member refid="structtask__stats_1a25372e6e94e4227cfaeb20f92e9e8135" kind="variable"><name>running</name></member>
+    <member refid="structtask__stats_1a65438df988ccaa545ac1625d29b4a65f" kind="variable"><name>waiting</name></member>
+    <member refid="structtask__stats_1a59d0f4bc141e6bde6442995f04a9242c" kind="variable"><name>sleeping</name></member>
+    <member refid="structtask__stats_1a9043fd053c811c6dc89aff764d90e081" kind="variable"><name>stopped</name></member>
+    <member refid="structtask__stats_1a44db8f8648756944822eae334c629228" kind="variable"><name>zombie</name></member>
+    <member refid="structtask__stats_1a47a27265d7297cfb0124e99e01649a88" kind="variable"><name>active_tasks</name></member>
+  </compound>
+  <compound refid="display_8c" kind="file"><name>display.c</name>
+    <member refid="display_8c_1afa773773eb0a45bfce33d4617dfc5ad6" kind="define"><name>DISP_PRINT</name></member>
+    <member refid="display_8c_1a454f20ff81fbabee07b2ce73959a6475" kind="variable"><name>scr</name></member>
+    <member refid="display_8c_1a7adc77618ddc9e96a5d706b31cdb0055" kind="variable"><name>win_x</name></member>
+    <member refid="display_8c_1ab577378f1d1499870c2e7c66d8e3680b" kind="variable"><name>win_y</name></member>
+    <member refid="display_8c_1a8cef096be1c4f919b5fec39602902286" kind="variable"><name>use_curses</name></member>
+    <member refid="display_8c_1ab9a03a819137f27005203cb0dea3c7fa" kind="function"><name>display_separator</name></member>
+    <member refid="display_8c_1a1e2f83d8dcc4bcb4fce6760ba7553f13" kind="function"><name>display_init</name></member>
+    <member refid="display_8c_1a2e8e9eb4a561c166c8bb86fe71894f43" kind="function"><name>display_refresh</name></member>
+    <member refid="display_8c_1ab12317f9443e7b4dd72f79cfc8324164" kind="function"><name>display_quit</name></member>
+    <member refid="display_8c_1a456c3918184a2900f154a31216df2d70" kind="function"><name>display_stop</name></member>
+  </compound>
+  <compound refid="display_8h" kind="file"><name>display.h</name>
+    <member refid="display_8h_1a1e2f83d8dcc4bcb4fce6760ba7553f13" kind="function"><name>display_init</name></member>
+    <member refid="display_8h_1a2e8e9eb4a561c166c8bb86fe71894f43" kind="function"><name>display_refresh</name></member>
+    <member refid="display_8h_1ab12317f9443e7b4dd72f79cfc8324164" kind="function"><name>display_quit</name></member>
+    <member refid="display_8h_1a456c3918184a2900f154a31216df2d70" kind="function"><name>display_stop</name></member>
+  </compound>
+  <compound refid="inspector_8c" kind="file"><name>inspector.c</name>
+    <member refid="inspector_8c_1a84365b0f701e1f4a7424d21046ae2d24" kind="function"><name>print_usage</name></member>
+    <member refid="inspector_8c_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="logger_8h" kind="file"><name>logger.h</name>
+    <member refid="logger_8h_1aa385268d3ec7b4d3ecceb7c787171bf0" kind="define"><name>LOGGER</name></member>
+    <member refid="logger_8h_1aa0d3fd3f5bc14b2d98c4ee59e8029d11" kind="define"><name>LOGGER_COLOR</name></member>
+    <member refid="logger_8h_1a9c0a761d7fcefcef9849ce0e3900d962" kind="define"><name>LOGGER_COLOR_RED</name></member>
+    <member refid="logger_8h_1a8dd5be6eedc6989bdfe0c3d75715600f" kind="define"><name>LOGGER_COLOR_BLUE</name></member>
+    <member refid="logger_8h_1a011fa8043c2689f76dad72c2c6eb31b6" kind="define"><name>LOGGER_COLOR_RESET</name></member>
+    <member refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kind="define"><name>LOGP</name></member>
+    <member refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kind="define"><name>LOG</name></member>
+  </compound>
+  <compound refid="procfs_8c" kind="file"><name>procfs.c</name>
+    <member refid="procfs_8c_1acb1112f87eb6d7023b4bc2adccebb75e" kind="function"><name>pfs_hostname</name></member>
+    <member refid="procfs_8c_1aa2daa2378b2816f378f7d8d1cad39371" kind="function"><name>pfs_kernel_version</name></member>
+    <member refid="procfs_8c_1aa9d05ac622f7322719bbcf8302c682ad" kind="function"><name>pfs_cpu_model</name></member>
+    <member refid="procfs_8c_1a9b207290dee3e4fc725a6800ab2813d6" kind="function"><name>pfs_cpu_units</name></member>
+    <member refid="procfs_8c_1a22f70e07728198887b6f062716183058" kind="function"><name>pfs_uptime</name></member>
+    <member refid="procfs_8c_1a2b539d023054cb32a82cc19e9fe1d977" kind="function"><name>pfs_format_uptime</name></member>
+    <member refid="procfs_8c_1ad7cd36585e7dc0dd239d622c60e1df69" kind="function"><name>pfs_load_avg</name></member>
+    <member refid="procfs_8c_1aac720420de0bc65b5f5180ef70593dc3" kind="function"><name>pfs_cpu_usage</name></member>
+    <member refid="procfs_8c_1a7c34da2ba41299f9777ac56e5c04fe6b" kind="function"><name>pfs_mem_usage</name></member>
+    <member refid="procfs_8c_1a3a7b8e342feb3d2ae29e01279c18087a" kind="function"><name>pfs_create_tstats</name></member>
+    <member refid="procfs_8c_1ace1568af21fee77d1ce8b68ac7460e8c" kind="function"><name>pfs_destroy_tstats</name></member>
+    <member refid="procfs_8c_1a78c77e940f997164cfe044717b5ce2e1" kind="function"><name>pfs_tasks</name></member>
+  </compound>
+  <compound refid="procfs_8h" kind="file"><name>procfs.h</name>
+    <member refid="procfs_8h_1acb1112f87eb6d7023b4bc2adccebb75e" kind="function"><name>pfs_hostname</name></member>
+    <member refid="procfs_8h_1aa2daa2378b2816f378f7d8d1cad39371" kind="function"><name>pfs_kernel_version</name></member>
+    <member refid="procfs_8h_1aa9d05ac622f7322719bbcf8302c682ad" kind="function"><name>pfs_cpu_model</name></member>
+    <member refid="procfs_8h_1a9b207290dee3e4fc725a6800ab2813d6" kind="function"><name>pfs_cpu_units</name></member>
+    <member refid="procfs_8h_1a22f70e07728198887b6f062716183058" kind="function"><name>pfs_uptime</name></member>
+    <member refid="procfs_8h_1a2b539d023054cb32a82cc19e9fe1d977" kind="function"><name>pfs_format_uptime</name></member>
+    <member refid="procfs_8h_1ad7cd36585e7dc0dd239d622c60e1df69" kind="function"><name>pfs_load_avg</name></member>
+    <member refid="procfs_8h_1a866cac2f8014b4c83f23243ab0e01ab3" kind="function"><name>pfs_cpu_usage</name></member>
+    <member refid="procfs_8h_1a6cde96a5ca78eb0d37fb4c8da3c7e0b4" kind="function"><name>pfs_mem_usage</name></member>
+    <member refid="procfs_8h_1a3a7b8e342feb3d2ae29e01279c18087a" kind="function"><name>pfs_create_tstats</name></member>
+    <member refid="procfs_8h_1ace1568af21fee77d1ce8b68ac7460e8c" kind="function"><name>pfs_destroy_tstats</name></member>
+    <member refid="procfs_8h_1a78c77e940f997164cfe044717b5ce2e1" kind="function"><name>pfs_tasks</name></member>
+  </compound>
+  <compound refid="README_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="util_8c" kind="file"><name>util.c</name>
+    <member refid="util_8c_1ad3a2e79e324c07c49615f5789f0bef73" kind="function"><name>open_path</name></member>
+    <member refid="util_8c_1a04380a46a51cecbff707bf9199012de9" kind="function"><name>one_lineread</name></member>
+    <member refid="util_8c_1a85946f927132d967d9f348e19b252c3f" kind="function"><name>lineread</name></member>
+    <member refid="util_8c_1a36cc4e6b1ce708ed7492ae0979b10bf5" kind="function"><name>next_token</name></member>
+    <member refid="util_8c_1a75fa1b7f896c1bc05d855ce9d9ceeffe" kind="function"><name>draw_percbar</name></member>
+    <member refid="util_8c_1aa9ecc65e735e295dc53f92cfefca6d9a" kind="function"><name>uid_to_uname</name></member>
+  </compound>
+  <compound refid="util_8h" kind="file"><name>util.h</name>
+    <member refid="util_8h_1ad3a2e79e324c07c49615f5789f0bef73" kind="function"><name>open_path</name></member>
+    <member refid="util_8h_1a04380a46a51cecbff707bf9199012de9" kind="function"><name>one_lineread</name></member>
+    <member refid="util_8h_1a85946f927132d967d9f348e19b252c3f" kind="function"><name>lineread</name></member>
+    <member refid="util_8h_1a36cc4e6b1ce708ed7492ae0979b10bf5" kind="function"><name>next_token</name></member>
+    <member refid="util_8h_1a75fa1b7f896c1bc05d855ce9d9ceeffe" kind="function"><name>draw_percbar</name></member>
+    <member refid="util_8h_1aa9ecc65e735e295dc53f92cfefca6d9a" kind="function"><name>uid_to_uname</name></member>
+  </compound>
+  <compound refid="indexpage" kind="page"><name>index</name>
+  </compound>
+</doxygenindex>

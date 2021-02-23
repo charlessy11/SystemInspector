@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structinspector__opts" kind="struct" language="C++" prot="public">
+    <compoundname>inspector_opts</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structinspector__opts_1a4179a88a320d322d68b6b23fa7946668" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* inspector_opts::procfs_loc</definition>
+        <argsstring></argsstring>
+        <name>procfs_loc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inspector.c" line="27" column="10" bodyfile="inspector.c" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinspector__opts_1a62e5258da4abc415d39e2ae4c1961c55" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool inspector_opts::one_shot</definition>
+        <argsstring></argsstring>
+        <name>one_shot</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inspector.c" line="28" column="10" bodyfile="inspector.c" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinspector__opts_1a256eb9fbca11e5039b2b00399924bf03" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int inspector_opts::interval</definition>
+        <argsstring></argsstring>
+        <name>interval</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="inspector.c" line="29" column="9" bodyfile="inspector.c" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Contains program command line options. </para>
+    </detaileddescription>
+    <location file="inspector.c" line="26" column="1" bodyfile="inspector.c" bodystart="26" bodyend="30"/>
+    <listofallmembers>
+      <member refid="structinspector__opts_1a256eb9fbca11e5039b2b00399924bf03" prot="public" virt="non-virtual"><scope>inspector_opts</scope><name>interval</name></member>
+      <member refid="structinspector__opts_1a62e5258da4abc415d39e2ae4c1961c55" prot="public" virt="non-virtual"><scope>inspector_opts</scope><name>one_shot</name></member>
+      <member refid="structinspector__opts_1a4179a88a320d322d68b6b23fa7946668" prot="public" virt="non-virtual"><scope>inspector_opts</scope><name>procfs_loc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

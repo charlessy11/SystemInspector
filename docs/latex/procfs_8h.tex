@@ -1,0 +1,253 @@
+\hypertarget{procfs_8h}{}\doxysection{procfs.\+h File Reference}
+\label{procfs_8h}\index{procfs.h@{procfs.h}}
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structload__avg}{load\+\_\+avg}}
+\item 
+struct \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}}
+\item 
+struct \mbox{\hyperlink{structmem__stats}{mem\+\_\+stats}}
+\item 
+struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}}
+\item 
+struct \mbox{\hyperlink{structtask__info}{task\+\_\+info}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{procfs_8h_acb1112f87eb6d7023b4bc2adccebb75e}{pfs\+\_\+hostname}} (char $\ast$proc\+\_\+dir, char $\ast$hostname\+\_\+buf, size\+\_\+t buf\+\_\+sz)
+\item 
+int \mbox{\hyperlink{procfs_8h_aa2daa2378b2816f378f7d8d1cad39371}{pfs\+\_\+kernel\+\_\+version}} (char $\ast$proc\+\_\+dir, char $\ast$version\+\_\+buf, size\+\_\+t buf\+\_\+sz)
+\item 
+int \mbox{\hyperlink{procfs_8h_aa9d05ac622f7322719bbcf8302c682ad}{pfs\+\_\+cpu\+\_\+model}} (char $\ast$proc\+\_\+dir, char $\ast$model\+\_\+buf, size\+\_\+t buf\+\_\+sz)
+\item 
+int \mbox{\hyperlink{procfs_8h_a9b207290dee3e4fc725a6800ab2813d6}{pfs\+\_\+cpu\+\_\+units}} (char $\ast$proc\+\_\+dir)
+\item 
+double \mbox{\hyperlink{procfs_8h_a22f70e07728198887b6f062716183058}{pfs\+\_\+uptime}} (char $\ast$proc\+\_\+dir)
+\item 
+int \mbox{\hyperlink{procfs_8h_a2b539d023054cb32a82cc19e9fe1d977}{pfs\+\_\+format\+\_\+uptime}} (double time, char $\ast$uptime\+\_\+buf)
+\item 
+struct \mbox{\hyperlink{structload__avg}{load\+\_\+avg}} \mbox{\hyperlink{procfs_8h_ad7cd36585e7dc0dd239d622c60e1df69}{pfs\+\_\+load\+\_\+avg}} (char $\ast$proc\+\_\+dir)
+\item 
+double \mbox{\hyperlink{procfs_8h_a866cac2f8014b4c83f23243ab0e01ab3}{pfs\+\_\+cpu\+\_\+usage}} (char $\ast$procfs\+\_\+dir, struct \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}} $\ast$prev, struct \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}} $\ast$curr)
+\item 
+struct \mbox{\hyperlink{structmem__stats}{mem\+\_\+stats}} \mbox{\hyperlink{procfs_8h_a6cde96a5ca78eb0d37fb4c8da3c7e0b4}{pfs\+\_\+mem\+\_\+usage}} (char $\ast$procfs\+\_\+dir)
+\item 
+struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} $\ast$ \mbox{\hyperlink{procfs_8h_a3a7b8e342feb3d2ae29e01279c18087a}{pfs\+\_\+create\+\_\+tstats}} ()
+\item 
+void \mbox{\hyperlink{procfs_8h_ace1568af21fee77d1ce8b68ac7460e8c}{pfs\+\_\+destroy\+\_\+tstats}} (struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} $\ast$tstats)
+\item 
+int \mbox{\hyperlink{procfs_8h_a78c77e940f997164cfe044717b5ce2e1}{pfs\+\_\+tasks}} (char $\ast$proc\+\_\+dir, struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} $\ast$tstats)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Retrieves raw information from procfs, parses it, and provides easy-\/to-\/use functions for displaying the data. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{procfs_8h_aa9d05ac622f7322719bbcf8302c682ad}\label{procfs_8h_aa9d05ac622f7322719bbcf8302c682ad}} 
+\index{procfs.h@{procfs.h}!pfs\_cpu\_model@{pfs\_cpu\_model}}
+\index{pfs\_cpu\_model@{pfs\_cpu\_model}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_cpu\_model()}{pfs\_cpu\_model()}}
+{\footnotesize\ttfamily int pfs\+\_\+cpu\+\_\+model (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{char $\ast$}]{model\+\_\+buf,  }\item[{size\+\_\+t}]{buf\+\_\+sz }\end{DoxyParamCaption})}
+
+Retrieves cpu model name of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc\+\_\+dir} & the location of procfs \\
+\hline
+{\em model\+\_\+buf} & stores the cpu model name \\
+\hline
+{\em buf\+\_\+sz} & buf\+\_\+sz size\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_a9b207290dee3e4fc725a6800ab2813d6}\label{procfs_8h_a9b207290dee3e4fc725a6800ab2813d6}} 
+\index{procfs.h@{procfs.h}!pfs\_cpu\_units@{pfs\_cpu\_units}}
+\index{pfs\_cpu\_units@{pfs\_cpu\_units}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_cpu\_units()}{pfs\_cpu\_units()}}
+{\footnotesize\ttfamily int pfs\+\_\+cpu\+\_\+units (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir }\end{DoxyParamCaption})}
+
+Sums the number of processing units of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc\+\_\+dir} & the location of procfs\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+counter the sum of processing units 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_a866cac2f8014b4c83f23243ab0e01ab3}\label{procfs_8h_a866cac2f8014b4c83f23243ab0e01ab3}} 
+\index{procfs.h@{procfs.h}!pfs\_cpu\_usage@{pfs\_cpu\_usage}}
+\index{pfs\_cpu\_usage@{pfs\_cpu\_usage}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_cpu\_usage()}{pfs\_cpu\_usage()}}
+{\footnotesize\ttfamily double pfs\+\_\+cpu\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{procfs\+\_\+dir,  }\item[{struct \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}} $\ast$}]{prev,  }\item[{struct \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}} $\ast$}]{curr }\end{DoxyParamCaption})}
+
+Retrieves cpu usage of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em procfs\+\_\+dir} & the location of procfs \\
+\hline
+{\em \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}}} & $\ast$prev input that represents the last CPU usage state \\
+\hline
+{\em \mbox{\hyperlink{structcpu__stats}{cpu\+\_\+stats}}} & $\ast$curr output that represents the current CPU usage state, and will be passed back in to pfs\+\_\+load\+\_\+avg on its next call\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cpu\+\_\+usage the cpu usage 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_a3a7b8e342feb3d2ae29e01279c18087a}\label{procfs_8h_a3a7b8e342feb3d2ae29e01279c18087a}} 
+\index{procfs.h@{procfs.h}!pfs\_create\_tstats@{pfs\_create\_tstats}}
+\index{pfs\_create\_tstats@{pfs\_create\_tstats}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_create\_tstats()}{pfs\_create\_tstats()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}}$\ast$ pfs\+\_\+create\+\_\+tstats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Creates memory for \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} structs
+
+\begin{DoxyReturn}{Returns}
+tstats the \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} structs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_ace1568af21fee77d1ce8b68ac7460e8c}\label{procfs_8h_ace1568af21fee77d1ce8b68ac7460e8c}} 
+\index{procfs.h@{procfs.h}!pfs\_destroy\_tstats@{pfs\_destroy\_tstats}}
+\index{pfs\_destroy\_tstats@{pfs\_destroy\_tstats}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_destroy\_tstats()}{pfs\_destroy\_tstats()}}
+{\footnotesize\ttfamily void pfs\+\_\+destroy\+\_\+tstats (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} $\ast$}]{tstats }\end{DoxyParamCaption})}
+
+Frees memory for \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} structs
+
+
+\begin{DoxyParams}{Parameters}
+{\em tstats} & the \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} structs \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{procfs_8h_a2b539d023054cb32a82cc19e9fe1d977}\label{procfs_8h_a2b539d023054cb32a82cc19e9fe1d977}} 
+\index{procfs.h@{procfs.h}!pfs\_format\_uptime@{pfs\_format\_uptime}}
+\index{pfs\_format\_uptime@{pfs\_format\_uptime}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_format\_uptime()}{pfs\_format\_uptime()}}
+{\footnotesize\ttfamily int pfs\+\_\+format\+\_\+uptime (\begin{DoxyParamCaption}\item[{double}]{time,  }\item[{char $\ast$}]{uptime\+\_\+buf }\end{DoxyParamCaption})}
+
+Formats uptime(in seconds) to days, hours, minutes, and seconds
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & the uptime(in seconds) \\
+\hline
+{\em uptime\+\_\+buf} & stores the formatted uptime\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_acb1112f87eb6d7023b4bc2adccebb75e}\label{procfs_8h_acb1112f87eb6d7023b4bc2adccebb75e}} 
+\index{procfs.h@{procfs.h}!pfs\_hostname@{pfs\_hostname}}
+\index{pfs\_hostname@{pfs\_hostname}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_hostname()}{pfs\_hostname()}}
+{\footnotesize\ttfamily int pfs\+\_\+hostname (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{char $\ast$}]{hostname\+\_\+buf,  }\item[{size\+\_\+t}]{buf\+\_\+sz }\end{DoxyParamCaption})}
+
+Retrieves hostname of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc\+\_\+dir} & the location of procfs \\
+\hline
+{\em hostname\+\_\+buf} & stores the hostname \\
+\hline
+{\em buf\+\_\+sz} & buf\+\_\+sz size\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_aa2daa2378b2816f378f7d8d1cad39371}\label{procfs_8h_aa2daa2378b2816f378f7d8d1cad39371}} 
+\index{procfs.h@{procfs.h}!pfs\_kernel\_version@{pfs\_kernel\_version}}
+\index{pfs\_kernel\_version@{pfs\_kernel\_version}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_kernel\_version()}{pfs\_kernel\_version()}}
+{\footnotesize\ttfamily int pfs\+\_\+kernel\+\_\+version (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{char $\ast$}]{version\+\_\+buf,  }\item[{size\+\_\+t}]{buf\+\_\+sz }\end{DoxyParamCaption})}
+
+Retrieves kernel version of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc\+\_\+dir} & the location of procfs \\
+\hline
+{\em version\+\_\+buf} & stores the kernel version \\
+\hline
+{\em buf\+\_\+sz} & buf\+\_\+sz size\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success, -\/1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_ad7cd36585e7dc0dd239d622c60e1df69}\label{procfs_8h_ad7cd36585e7dc0dd239d622c60e1df69}} 
+\index{procfs.h@{procfs.h}!pfs\_load\_avg@{pfs\_load\_avg}}
+\index{pfs\_load\_avg@{pfs\_load\_avg}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_load\_avg()}{pfs\_load\_avg()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structload__avg}{load\+\_\+avg}} pfs\+\_\+load\+\_\+avg (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir }\end{DoxyParamCaption})}
+
+Retrieves load average of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc\+\_\+dir} & the location of procfs\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+lavg the load average 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_a6cde96a5ca78eb0d37fb4c8da3c7e0b4}\label{procfs_8h_a6cde96a5ca78eb0d37fb4c8da3c7e0b4}} 
+\index{procfs.h@{procfs.h}!pfs\_mem\_usage@{pfs\_mem\_usage}}
+\index{pfs\_mem\_usage@{pfs\_mem\_usage}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_mem\_usage()}{pfs\_mem\_usage()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structmem__stats}{mem\+\_\+stats}} pfs\+\_\+mem\+\_\+usage (\begin{DoxyParamCaption}\item[{char $\ast$}]{procfs\+\_\+dir }\end{DoxyParamCaption})}
+
+Retrieves memory usage of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em procfs\+\_\+dir} & the location of procfs\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mstats the memory usage 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_a78c77e940f997164cfe044717b5ce2e1}\label{procfs_8h_a78c77e940f997164cfe044717b5ce2e1}} 
+\index{procfs.h@{procfs.h}!pfs\_tasks@{pfs\_tasks}}
+\index{pfs\_tasks@{pfs\_tasks}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_tasks()}{pfs\_tasks()}}
+{\footnotesize\ttfamily int pfs\+\_\+tasks (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{struct \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} $\ast$}]{tstats }\end{DoxyParamCaption})}
+
+Retrieves tasks info of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc\+\_\+dir} & the location of procfs \\
+\hline
+{\em tstats} & the \mbox{\hyperlink{structtask__stats}{task\+\_\+stats}} structs\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if success, or EXIT\+\_\+\+FAILURE if otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{procfs_8h_a22f70e07728198887b6f062716183058}\label{procfs_8h_a22f70e07728198887b6f062716183058}} 
+\index{procfs.h@{procfs.h}!pfs\_uptime@{pfs\_uptime}}
+\index{pfs\_uptime@{pfs\_uptime}!procfs.h@{procfs.h}}
+\doxysubsubsection{\texorpdfstring{pfs\_uptime()}{pfs\_uptime()}}
+{\footnotesize\ttfamily double pfs\+\_\+uptime (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir }\end{DoxyParamCaption})}
+
+Retrieves uptime(in seconds) of the machine
+
+
+\begin{DoxyParams}{Parameters}
+{\em proc\+\_\+dir} & the location of procfs\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+time the amount of uptime 
+\end{DoxyReturn}

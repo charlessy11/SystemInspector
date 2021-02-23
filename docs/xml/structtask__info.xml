@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structtask__info" kind="struct" language="C++" prot="public">
+    <compoundname>task_info</compoundname>
+    <includes refid="procfs_8h" local="no">procfs.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structtask__info_1aa4235b38be35cb61638b4a0ee1cb4df8" prot="public" static="no" mutable="no">
+        <type>pid_t</type>
+        <definition>pid_t task_info::pid</definition>
+        <argsstring></argsstring>
+        <name>pid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="56" column="11" bodyfile="procfs.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__info_1a0023ed413458938a6268b87c6291fb14" prot="public" static="no" mutable="no">
+        <type>uid_t</type>
+        <definition>uid_t task_info::uid</definition>
+        <argsstring></argsstring>
+        <name>uid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="57" column="11" bodyfile="procfs.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__info_1a20832eb57e0245ef6cd939adc3be1dfd" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char task_info::name[26]</definition>
+        <argsstring>[26]</argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="58" column="10" bodyfile="procfs.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__info_1a1e6a20838a7a44d550d24e23584c45d9" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char task_info::state[13]</definition>
+        <argsstring>[13]</argsstring>
+        <name>state</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="59" column="10" bodyfile="procfs.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Task information </para>
+    </detaileddescription>
+    <location file="procfs.h" line="55" column="1" bodyfile="procfs.h" bodystart="55" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structtask__info_1a20832eb57e0245ef6cd939adc3be1dfd" prot="public" virt="non-virtual"><scope>task_info</scope><name>name</name></member>
+      <member refid="structtask__info_1aa4235b38be35cb61638b4a0ee1cb4df8" prot="public" virt="non-virtual"><scope>task_info</scope><name>pid</name></member>
+      <member refid="structtask__info_1a1e6a20838a7a44d550d24e23584c45d9" prot="public" virt="non-virtual"><scope>task_info</scope><name>state</name></member>
+      <member refid="structtask__info_1a0023ed413458938a6268b87c6291fb14" prot="public" virt="non-virtual"><scope>task_info</scope><name>uid</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

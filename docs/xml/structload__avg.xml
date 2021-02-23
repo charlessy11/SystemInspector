@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structload__avg" kind="struct" language="C++" prot="public">
+    <compoundname>load_avg</compoundname>
+    <includes refid="procfs_8h" local="no">procfs.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structload__avg_1a9e0af8904aceaad2dfef0568bb2d7fea" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double load_avg::one</definition>
+        <argsstring></argsstring>
+        <name>one</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="17" column="12" bodyfile="procfs.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structload__avg_1a0a01cd30ccda836145b79f3ba955101a" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double load_avg::five</definition>
+        <argsstring></argsstring>
+        <name>five</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="18" column="12" bodyfile="procfs.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structload__avg_1ae672600cd94750a11062e9699b586fa0" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double load_avg::fifteen</definition>
+        <argsstring></argsstring>
+        <name>fifteen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="19" column="12" bodyfile="procfs.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Load average every one, five, and fifteen minutes </para>
+    </detaileddescription>
+    <location file="procfs.h" line="16" column="1" bodyfile="procfs.h" bodystart="16" bodyend="20"/>
+    <listofallmembers>
+      <member refid="structload__avg_1ae672600cd94750a11062e9699b586fa0" prot="public" virt="non-virtual"><scope>load_avg</scope><name>fifteen</name></member>
+      <member refid="structload__avg_1a0a01cd30ccda836145b79f3ba955101a" prot="public" virt="non-virtual"><scope>load_avg</scope><name>five</name></member>
+      <member refid="structload__avg_1a9e0af8904aceaad2dfef0568bb2d7fea" prot="public" virt="non-virtual"><scope>load_avg</scope><name>one</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

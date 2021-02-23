@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>Project 1: System Inspector</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><anchor id="index_1md_README"/> See: <ulink url="https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html">https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html</ulink></para>
+<para><bold>About This Program:</bold></para>
+<para>The System Inspector Program implements a Unix utility that inspects the system it runs on and displays a summary of useful information of the system to the user. It behaves somewhat similar to the <computeroutput>top</computeroutput> command found in many Unix-like operating systems which is used to show the Linux processes. Similarly, the two provide a dynamic real-time view of the running system.</para>
+<para><bold>How It Works:</bold></para>
+<para>The program displays a summary of useful information of the system by reading the contents of <computeroutput>\proc</computeroutput>.</para>
+<para><bold>How It&apos;s Built:</bold></para>
+<para>Here is a list of methods that reads the different contents of <computeroutput>\proc</computeroutput>:</para>
+<para><itemizedlist>
+<listitem><para>Load average every one, five, and fifteen minutes: `struct <ref refid="structload__avg" kindref="compound">load_avg</ref> { double one; double five; double fifteen; };`</para>
+</listitem><listitem><para>CPU information to check cpu usage: `struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> { long idle; long total; };`</para>
+</listitem><listitem><para>Memory information to check memory usage: `struct <ref refid="structmem__stats" kindref="compound">mem_stats</ref> { double used; double total; };`</para>
+</listitem><listitem><para>Task statistics: `struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> { unsigned int total; unsigned int running; unsigned int waiting; unsigned int sleeping; unsigned int stopped; unsigned int zombie; struct <ref refid="structtask__info" kindref="compound">task_info</ref> *active_tasks; };`</para>
+</listitem><listitem><para>Task information: `struct <ref refid="structtask__info" kindref="compound">task_info</ref> { pid_t pid; uid_t uid; char name[26]; char state[13]; };`</para>
+</listitem><listitem><para>Retrieves hostname of the machine: <computeroutput>int <ref refid="procfs_8h_1acb1112f87eb6d7023b4bc2adccebb75e" kindref="member">pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)</ref>;</computeroutput></para>
+</listitem><listitem><para>Retrieves kernel version of the machine: <computeroutput>int <ref refid="procfs_8h_1aa2daa2378b2816f378f7d8d1cad39371" kindref="member">pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)</ref>;</computeroutput></para>
+</listitem><listitem><para>Retrieves cpu model name of the machine: <computeroutput>int <ref refid="procfs_8h_1aa9d05ac622f7322719bbcf8302c682ad" kindref="member">pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)</ref>;</computeroutput></para>
+</listitem><listitem><para>Sums up the number of processing units of the machine: <computeroutput>int <ref refid="procfs_8h_1a9b207290dee3e4fc725a6800ab2813d6" kindref="member">pfs_cpu_units(char *proc_dir)</ref>;</computeroutput></para>
+</listitem><listitem><para>Retrieves uptime(in seconds) of the machine: <computeroutput>double <ref refid="procfs_8h_1a22f70e07728198887b6f062716183058" kindref="member">pfs_uptime(char *proc_dir)</ref>;</computeroutput></para>
+</listitem><listitem><para>Formats uptime(in seconds) to days, hours, minutes, and seconds: <computeroutput>int <ref refid="procfs_8h_1a2b539d023054cb32a82cc19e9fe1d977" kindref="member">pfs_format_uptime(double time, char *uptime_buf)</ref>;</computeroutput></para>
+</listitem><listitem><para>Retrieves load average of the machine: <computeroutput>struct <ref refid="structload__avg" kindref="compound">load_avg</ref> <ref refid="procfs_8h_1ad7cd36585e7dc0dd239d622c60e1df69" kindref="member">pfs_load_avg(char *proc_dir)</ref>;</computeroutput></para>
+</listitem><listitem><para>Retrieves cpu usage of the machine: <computeroutput>double <ref refid="procfs_8h_1a866cac2f8014b4c83f23243ab0e01ab3" kindref="member">pfs_cpu_usage(char *procfs_dir, struct cpu_stats *prev, struct cpu_stats *curr)</ref>;</computeroutput></para>
+</listitem><listitem><para>Retrieves memory usage of the machine: <computeroutput>struct <ref refid="structmem__stats" kindref="compound">mem_stats</ref> <ref refid="procfs_8h_1a6cde96a5ca78eb0d37fb4c8da3c7e0b4" kindref="member">pfs_mem_usage(char *procfs_dir)</ref>;</computeroutput></para>
+</listitem><listitem><para>Creates memory for <ref refid="structtask__stats" kindref="compound">task_stats</ref> structs: <computeroutput>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *pfs_create_tstats();</computeroutput></para>
+</listitem><listitem><para>Frees memory for <ref refid="structtask__stats" kindref="compound">task_stats</ref> structs: <computeroutput>void <ref refid="procfs_8h_1ace1568af21fee77d1ce8b68ac7460e8c" kindref="member">pfs_destroy_tstats(struct task_stats *tstats)</ref>;</computeroutput></para>
+</listitem><listitem><para>Retrieves tasks info of the machine: <computeroutput>int <ref refid="procfs_8h_1a78c77e940f997164cfe044717b5ce2e1" kindref="member">pfs_tasks(char *proc_dir, struct task_stats *tstats)</ref>;</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>Here is a list of helper methods:</para>
+<para><itemizedlist>
+<listitem><para>Opens specified path: <computeroutput>int open_path(char *proc_dir, char *path);</computeroutput></para>
+</listitem><listitem><para>Reads one line of file: <computeroutput>ssize_t one_lineread(int fd, char *buf, size_t sz, char *delim);</computeroutput></para>
+</listitem><listitem><para>Reads a file line by line: <computeroutput>ssize_t lineread(int fd, char *buf, size_t sz);</computeroutput></para>
+</listitem><listitem><para>Tokenize string: <computeroutput>char *next_token(char **str_ptr, const char *delim);</computeroutput></para>
+</listitem><listitem><para>Draws percentage bar: <computeroutput>void draw_percbar(char *buf, double frac);</computeroutput></para>
+</listitem><listitem><para>Maps ID numbers (UID) associated with running processes to corresponding username: <computeroutput>void uid_to_uname(char *name_buf, uid_t uid);</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para>To compile and run:</para>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">make</highlight></codeline>
+<codeline><highlight class="normal">./inspector</highlight></codeline>
+</programlisting></para>
+<sect1 id="index_1autotoc_md1">
+<title>Testing</title>
+<para>To execute the test cases, use <computeroutput>make test</computeroutput>. To pull in updated test cases, run <computeroutput>make testupdate</computeroutput>. You can also run a specific test case instead of all of them:</para>
+<para><programlisting><codeline><highlight class="normal">#<sp/>Run<sp/>all<sp/>test<sp/>cases:</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>a<sp/>specific<sp/>test<sp/>case:</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test<sp/>run=4</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Run<sp/>a<sp/>few<sp/>specific<sp/>test<sp/>cases<sp/>(4,<sp/>8,<sp/>and<sp/>12<sp/>in<sp/>this<sp/>case):</highlight></codeline>
+<codeline><highlight class="normal">make<sp/>test<sp/>run=&apos;4<sp/>8<sp/>12&apos;</highlight></codeline>
+</programlisting> </para>
+</sect1>
+    </detaileddescription>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

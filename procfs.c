@@ -288,16 +288,15 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
 
 struct task_stats *pfs_create_tstats() {
     struct task_stats *tstats = calloc(1, sizeof(struct task_stats));
-    tstats->active_tasks = calloc(1, sizeof(struct task_stats)); 
-
+    tstats->active_tasks = calloc(1, sizeof(struct task_stats));
     return tstats;
 }
 
 void pfs_destroy_tstats(struct task_stats *tstats) {
-    //free tstats
-    free(tstats);
     //free active tasks
     free(tstats->active_tasks);
+    //free tstats
+    free(tstats);
 }
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
@@ -342,8 +341,10 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
             int fd = open(direct, O_RDONLY);
 
                 ssize_t read_sz = 0;    
+
                 while ((read_sz = lineread(fd, line, 256)) > 0) {
                     //check if line of task name
+
                     if (strstr(line, "Name:")) {
                         char *next_tok = line;
                         next_token(&next_tok, " \t\n");
@@ -425,6 +426,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 }
         }
     }
+
     closedir(directory); 
     return 0;
 }

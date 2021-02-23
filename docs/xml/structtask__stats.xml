@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structtask__stats" kind="struct" language="C++" prot="public">
+    <compoundname>task_stats</compoundname>
+    <includes refid="procfs_8h" local="no">procfs.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structtask__stats_1a94c67c04a275e82c99a309f8b4aa9af3" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int task_stats::total</definition>
+        <argsstring></argsstring>
+        <name>total</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="42" column="18" bodyfile="procfs.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__stats_1a25372e6e94e4227cfaeb20f92e9e8135" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int task_stats::running</definition>
+        <argsstring></argsstring>
+        <name>running</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="43" column="18" bodyfile="procfs.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__stats_1a65438df988ccaa545ac1625d29b4a65f" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int task_stats::waiting</definition>
+        <argsstring></argsstring>
+        <name>waiting</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="44" column="18" bodyfile="procfs.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__stats_1a59d0f4bc141e6bde6442995f04a9242c" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int task_stats::sleeping</definition>
+        <argsstring></argsstring>
+        <name>sleeping</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="45" column="18" bodyfile="procfs.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__stats_1a9043fd053c811c6dc89aff764d90e081" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int task_stats::stopped</definition>
+        <argsstring></argsstring>
+        <name>stopped</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="46" column="18" bodyfile="procfs.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__stats_1a44db8f8648756944822eae334c629228" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int task_stats::zombie</definition>
+        <argsstring></argsstring>
+        <name>zombie</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="47" column="18" bodyfile="procfs.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtask__stats_1a47a27265d7297cfb0124e99e01649a88" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="structtask__info" kindref="compound">task_info</ref> *</type>
+        <definition>struct task_info* task_stats::active_tasks</definition>
+        <argsstring></argsstring>
+        <name>active_tasks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.h" line="49" column="20" bodyfile="procfs.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Task statistics </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>task_stats</label>
+        <link refid="structtask__stats"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>active_tasks</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>task_info</label>
+        <link refid="structtask__info"/>
+      </node>
+    </collaborationgraph>
+    <location file="procfs.h" line="41" column="1" bodyfile="procfs.h" bodystart="41" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structtask__stats_1a47a27265d7297cfb0124e99e01649a88" prot="public" virt="non-virtual"><scope>task_stats</scope><name>active_tasks</name></member>
+      <member refid="structtask__stats_1a25372e6e94e4227cfaeb20f92e9e8135" prot="public" virt="non-virtual"><scope>task_stats</scope><name>running</name></member>
+      <member refid="structtask__stats_1a59d0f4bc141e6bde6442995f04a9242c" prot="public" virt="non-virtual"><scope>task_stats</scope><name>sleeping</name></member>
+      <member refid="structtask__stats_1a9043fd053c811c6dc89aff764d90e081" prot="public" virt="non-virtual"><scope>task_stats</scope><name>stopped</name></member>
+      <member refid="structtask__stats_1a94c67c04a275e82c99a309f8b4aa9af3" prot="public" virt="non-virtual"><scope>task_stats</scope><name>total</name></member>
+      <member refid="structtask__stats_1a65438df988ccaa545ac1625d29b4a65f" prot="public" virt="non-virtual"><scope>task_stats</scope><name>waiting</name></member>
+      <member refid="structtask__stats_1a44db8f8648756944822eae334c629228" prot="public" virt="non-virtual"><scope>task_stats</scope><name>zombie</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
