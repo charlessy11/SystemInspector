@@ -169,3 +169,11 @@ void uid_to_uname(char *name_buf, uid_t uid) {
 	close(fd);
 	name_buf[15] = '\0';
 }
+
+// void tasks() {
+// 	tstats->active_tasks[i].pid = atoi(entry->d_name);
+//     tstats->active_tasks[i].uid = uid;
+//     strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
+//     strcpy(tstats->active_tasks[i].state, task_state);
+//     i++;
+// }

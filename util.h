@@ -39,7 +39,7 @@ ssize_t one_lineread(int fd, char *buf, size_t sz, char *delim);
 ssize_t lineread(int fd, char *buf, size_t sz);
 
 /**
-* Tokenize
+* Tokenize string
 *
 * @param str_ptr point of tokenization
 * @param delim deliminator
@@ -58,10 +58,10 @@ char *next_token(char **str_ptr, const char *delim);
 void draw_percbar(char *buf, double frac);
 
 /**
-* Draws percentage bar
+* Maps ID numbers (UID) associated with running processes to corresponding username
 *
 * @param name_buf stores names
-* @param uid the uid
+* @param uid the user identification
 *
 */
 void uid_to_uname(char *name_buf, uid_t uid);

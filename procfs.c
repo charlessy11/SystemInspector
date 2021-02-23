@@ -294,10 +294,10 @@ struct task_stats *pfs_create_tstats() {
 }
 
 void pfs_destroy_tstats(struct task_stats *tstats) {
-    //free active tasks
-    free(tstats->active_tasks);
     //free tstats
     free(tstats);
+    //free active tasks
+    free(tstats->active_tasks);
 }
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
@@ -315,8 +315,8 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
     }
 
     int uid;
-    char line[256];
-    char task_name[26];
+    char line[256] = { 0 };
+    char task_name[26] = { 0 };
     char task_state[13];
     int i = 0;
     int threshold = 1;
@@ -325,37 +325,37 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
     while ((entry = readdir(directory)) != NULL) {
         if ((entry->d_type == DT_DIR) && isdigit(*(entry->d_name))) {
             ++tasks;
-
             //realloc tasks when needed
             if (tasks > threshold) {
                 //reallocating memory for active tasks based on task no.
                 tstats->active_tasks = (struct task_info*)realloc(tstats->active_tasks, sizeof(struct task_info)*tasks);
                 ++threshold;
             } 
-
             //error checking
             if(tstats->active_tasks == NULL) {
                 return EXIT_FAILURE;
             }
 
             char direct[1024];
-         
             snprintf(direct, 1024, "%s/%s/status", proc_dir, entry->d_name);
 
             int fd = open(direct, O_RDONLY);
 
                 ssize_t read_sz = 0;    
                 while ((read_sz = lineread(fd, line, 256)) > 0) {
+                    //check if line of task name
                     if (strstr(line, "Name:")) {
                         char *next_tok = line;
                         next_token(&next_tok, " \t\n");
                         strcpy(task_name, next_token(&next_tok, " \t\n"));
                     }
+                    //check if line of task state
                     else if (strstr(line, "State:")) {
                         char *next_tok = line;
                         next_token(&next_tok, "\t");
                         char symbol = *(next_token(&next_tok, " "));
                         strcpy(task_state, next_token(&next_tok, "()"));
+                        //state flags we're interested in
                         if (symbol == 'T' || symbol == 't') {
                             stopped++; 
                         }
@@ -372,61 +372,59 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                             waiting++;
                         }
                     }
+                    //check if line of UID
                     else if (strstr(line, "Uid:")) {
                         char *next_tok = line;
                         char *curr_tok;
                         curr_tok = next_token(&next_tok, " \t\n");
-                        next_token(&next_tok, " \t\n");
-                        next_token(&next_tok, " \t\n");
                         uid = atoi(curr_tok);
                     }  
                 }
+                //update total tasks
+                tstats->total = tasks; 
+                //update task status
+                tstats->running = running;
+                tstats->waiting = waiting;
+                tstats->sleeping = sleeping;
+                tstats->stopped = stopped;
+                tstats->zombie = zombie;
 
                 close(fd);
 
-                if (!strcmp(task_state, "running")) {
+                //check whether state of task is running
+                if (strcmp(task_state, "running") == 0) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
                     strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
-                    tstats->active_tasks[i].name[25] = '\0';
                     i++;
                 }
-                else if (!strcmp(task_state, "disk sleep")) {
+                //check whether state of task is sleeping
+                else if (strcmp(task_state, "disk sleep") == 0) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
                     strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
-                    tstats->active_tasks[i].name[25] = '\0';
                     i++;
                 }
-                else if (!strcmp(task_state, "stopped") || !strcmp(task_state, "tracing stop")) {
+                //check whether state of task is stopped
+                else if (strcmp(task_state, "stopped") == 0 || strcmp(task_state, "tracing stop") == 0) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
                     strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
-                    tstats->active_tasks[i].name[25] = '\0';
                     i++;
                 } 
-                else if (!strcmp(task_state, "zombie")) {
+                //check whether state of task is zombie
+                else if (strcmp(task_state, "zombie") == 0) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
                     strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
-                    tstats->active_tasks[i].name[25] = '\0';
                     i++;
                 }
         }
     }
-
     closedir(directory); 
-
-    tstats->total = tasks; 
-    tstats->running = running;
-    tstats->waiting = waiting;
-    tstats->sleeping = sleeping;
-    tstats->stopped = stopped;
-    tstats->zombie = zombie;
-  
     return 0;
 }

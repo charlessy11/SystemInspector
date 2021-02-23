@@ -26,7 +26,7 @@ docs: Doxyfile
 	doxygen
 
 clean:
-	rm -f $(bin) $(obj) libinspector.so
+	rm -f $(bin) $(obj) libinspector.so vgcore.*
 	rm -rf docs
 
 # Individual dependencies --
