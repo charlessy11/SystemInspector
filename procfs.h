@@ -159,7 +159,7 @@ struct mem_stats pfs_mem_usage(char *procfs_dir);
 struct task_stats *pfs_create_tstats();
 
 /**
-* Destroys memory for task_stats structs
+* Frees memory for task_stats structs
 *
 * @param tstats the task_stats structs
 *

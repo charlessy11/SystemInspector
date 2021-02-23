@@ -288,12 +288,15 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
 
 struct task_stats *pfs_create_tstats() {
     struct task_stats *tstats = calloc(1, sizeof(struct task_stats));
+    tstats->active_tasks = calloc(1, sizeof(struct task_stats)); 
 
     return tstats;
 }
 
 void pfs_destroy_tstats(struct task_stats *tstats) {
+    //free active tasks
     free(tstats->active_tasks);
+    //free tstats
     free(tstats);
 }
 
@@ -311,32 +314,30 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
         return -1;
     }
 
+    int uid;
+    char line[256];
+    char task_name[26];
+    char task_state[13];
+    int i = 0;
+    int threshold = 1;
+
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
         if ((entry->d_type == DT_DIR) && isdigit(*(entry->d_name))) {
             ++tasks;
-        }
-    }
-    closedir(directory);
 
-    //reallocating memory for active tasks based on task no.
-    tstats->active_tasks = (struct task_info*)realloc(tstats->active_tasks, sizeof(struct task_info)*tasks); 
+            //realloc tasks when needed
+            if (tasks > threshold) {
+                //reallocating memory for active tasks based on task no.
+                tstats->active_tasks = (struct task_info*)realloc(tstats->active_tasks, sizeof(struct task_info)*tasks);
+                ++threshold;
+            } 
 
-    //error checking
-    if(tstats->active_tasks == NULL) {
-        return EXIT_FAILURE;
-    }
+            //error checking
+            if(tstats->active_tasks == NULL) {
+                return EXIT_FAILURE;
+            }
 
-    int uid;
-    char line[1000];
-    char task_name[26];
-    char task_state[13];
-    int i = 0;
-
-    directory = opendir(proc_dir);
-    while ((entry = readdir(directory)) != NULL) {
-
-        if ((entry->d_type == DT_DIR) && isdigit(*(entry->d_name))) {
             char direct[1024];
          
             snprintf(direct, 1024, "%s/%s/status", proc_dir, entry->d_name);
@@ -344,7 +345,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
             int fd = open(direct, O_RDONLY);
 
                 ssize_t read_sz = 0;    
-                while ((read_sz = lineread(fd, line, 1000)) > 0) {
+                while ((read_sz = lineread(fd, line, 256)) > 0) {
                     if (strstr(line, "Name:")) {
                         char *next_tok = line;
                         next_token(&next_tok, " \t\n");
@@ -355,7 +356,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                         next_token(&next_tok, "\t");
                         char symbol = *(next_token(&next_tok, " "));
                         strcpy(task_state, next_token(&next_tok, "()"));
-                        if (symbol == 'T') {
+                        if (symbol == 'T' || symbol == 't') {
                             stopped++; 
                         }
                         else if (symbol == 'S' || symbol == 'I') {
@@ -386,7 +387,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 if (!strcmp(task_state, "running")) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
                     tstats->active_tasks[i].name[25] = '\0';
                     i++;
@@ -394,7 +395,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 else if (!strcmp(task_state, "disk sleep")) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
                     tstats->active_tasks[i].name[25] = '\0';
                     i++;
@@ -402,7 +403,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 else if (!strcmp(task_state, "stopped") || !strcmp(task_state, "tracing stop")) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
                     tstats->active_tasks[i].name[25] = '\0';
                     i++;
@@ -410,7 +411,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 else if (!strcmp(task_state, "zombie")) {
                     tstats->active_tasks[i].pid = atoi(entry->d_name);
                     tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25);
+                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
                     strcpy(tstats->active_tasks[i].state, task_state);
                     tstats->active_tasks[i].name[25] = '\0';
                     i++;

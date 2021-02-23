@@ -140,31 +140,29 @@ void draw_percbar(char *buf, double frac) {
 
 void uid_to_uname(char *name_buf, uid_t uid) {
 	char *path = "/etc/passwd";
-	char temp[_POSIX_PATH_MAX];
+	char temp[_POSIX_PATH_MAX]; //max number of bytes in a file name component
 
 	int fd = open(path, O_RDONLY);
 
-	bool is_changed = false;
+	bool flag = false;
 	char *ptr;
-
 	while (true) {
 		ssize_t read_sz = one_lineread(fd, temp, _POSIX_PATH_MAX, "\n");
 		if (read_sz <= 0) {
 			break;
 		}
+		char user_name[15]; //usernames must be no longer than 15 characters
+        strcpy(user_name, temp);
 
-		char name[1000];
-        strcpy(name, temp);
-
-        ptr = name;
-		sprintf(name, "%s", next_token(&ptr, ":"));
+        ptr = user_name;
+		sprintf(user_name, "%s", next_token(&ptr, ":"));
 		next_token(&ptr, ":");
 
 		if (atoi(next_token(&ptr, ":")) == uid) {
-			sprintf(name_buf, "%s", name);
-			is_changed = true;
+			sprintf(name_buf, "%s", user_name);
+			flag = true;
 		}
-		if (is_changed == false) {
+		if (flag == false) {
 			sprintf(name_buf, "%d", uid);
 		}
 	}
