@@ -122,7 +122,7 @@ void draw_percbar(char *buf, double frac) {
 	else if (frac > 1 || isinf(frac)) {
 		frac = 1;
 	}
-	//compute in the form of percentage that fits in the bar
+	//compute to scale usage to fit in percbar
 	int amount = (((round(frac * 100)) / 5 ) + 1);
 
 	int i;
