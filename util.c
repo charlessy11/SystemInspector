@@ -172,7 +172,7 @@ void uid_to_uname(char *name_buf, uid_t uid) {
 }
 
 void fill_tasks(struct task_stats *tstats, int pid, int uid, char *task_name, char *task_state, int *counter) {
-	tstats->active_tasks[*(counter)].pid = pid;
+    tstats->active_tasks[*(counter)].pid = pid;
     tstats->active_tasks[*(counter)].uid = uid;
     strncpy(tstats->active_tasks[*(counter)].name, task_name, 25); //Process names should be no longer than 25 characters
     strcpy(tstats->active_tasks[*(counter)].state, task_state);
