@@ -115,14 +115,14 @@ void draw_percbar(char *buf, double frac) {
 	char percbar[40] = { 0 };
 	percbar[0] = '[';
 	percbar[21] = ']';
-
+	//checks if amount of usage is withing appropriate range
 	if (frac <= 0 || isnan(frac)) {
 		frac = 0;
 	}
 	else if (frac > 1 || isinf(frac)) {
 		frac = 1;
 	}
-
+	//compute in the form of percentage that fits in the bar
 	int amount = (((round(frac * 100)) / 5 ) + 1);
 
 	int i;
@@ -153,9 +153,9 @@ void uid_to_uname(char *name_buf, uid_t uid) {
 			break;
 		}
 		char user_name[15]; //usernames must be no longer than 15 characters
-        strcpy(user_name, temp);
+        	strcpy(user_name, temp);
 
-        ptr = user_name;
+        	ptr = user_name;
 		sprintf(user_name, "%s", next_token(&ptr, ":"));
 		next_token(&ptr, ":");
 
