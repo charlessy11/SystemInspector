@@ -90,6 +90,7 @@ Here is a list of helper methods:
 
 * Maps ID numbers (UID) associated with running processes to corresponding username: `void uid_to_uname(char *name_buf, uid_t uid);`
 
+*More information about these methods such as input parameters and return values in header files
 
 To compile and run:
 
@@ -97,6 +98,10 @@ To compile and run:
 make
 ./inspector
 ```
+**Sample Output:**
+
+<img width="653" alt="Screen Shot 2021-02-23 at 2 08 09 PM" src="https://user-images.githubusercontent.com/61255802/108840687-b2219900-7611-11eb-9f63-f0c9fa3b3650.png">
+
 
 ## Testing
 
