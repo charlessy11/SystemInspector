@@ -101,6 +101,7 @@
     <member refid="util_8c_1a36cc4e6b1ce708ed7492ae0979b10bf5" kind="function"><name>next_token</name></member>
     <member refid="util_8c_1a75fa1b7f896c1bc05d855ce9d9ceeffe" kind="function"><name>draw_percbar</name></member>
     <member refid="util_8c_1aa9ecc65e735e295dc53f92cfefca6d9a" kind="function"><name>uid_to_uname</name></member>
+    <member refid="util_8c_1a2fa00e275526a9e990ed3ebea1330825" kind="function"><name>fill_tasks</name></member>
   </compound>
   <compound refid="util_8h" kind="file"><name>util.h</name>
     <member refid="util_8h_1ad3a2e79e324c07c49615f5789f0bef73" kind="function"><name>open_path</name></member>
@@ -109,6 +110,7 @@
     <member refid="util_8h_1a36cc4e6b1ce708ed7492ae0979b10bf5" kind="function"><name>next_token</name></member>
     <member refid="util_8h_1a75fa1b7f896c1bc05d855ce9d9ceeffe" kind="function"><name>draw_percbar</name></member>
     <member refid="util_8h_1aa9ecc65e735e295dc53f92cfefca6d9a" kind="function"><name>uid_to_uname</name></member>
+    <member refid="util_8h_1a2fa00e275526a9e990ed3ebea1330825" kind="function"><name>fill_tasks</name></member>
   </compound>
   <compound refid="indexpage" kind="page"><name>index</name>
   </compound>

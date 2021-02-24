@@ -11,6 +11,7 @@
 
 #include "util.h"
 #include "logger.h"
+#include "procfs.h"
 
 int open_path(char *proc_dir, char *path) {
 	if (proc_dir == NULL || path == NULL) {
@@ -110,7 +111,7 @@ char *next_token(char **str_ptr, const char *delim)
 }
 
 void draw_percbar(char *buf, double frac) {
-	//percbar has a total of 20 '-'/'#', so we allocate space for that plus allowance
+	//percbar displays 20 '-'/'#', so we allocate space for that plus allowance
 	char percbar[40] = { 0 };
 	percbar[0] = '[';
 	percbar[21] = ']';
@@ -170,10 +171,10 @@ void uid_to_uname(char *name_buf, uid_t uid) {
 	name_buf[15] = '\0';
 }
 
-// void tasks() {
-// 	tstats->active_tasks[i].pid = atoi(entry->d_name);
-//     tstats->active_tasks[i].uid = uid;
-//     strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
-//     strcpy(tstats->active_tasks[i].state, task_state);
-//     i++;
-// }
+void fill_tasks(struct task_stats *tstats, int pid, int uid, char *task_name, char *task_state, int *counter) {
+	tstats->active_tasks[*(counter)].pid = pid;
+    tstats->active_tasks[*(counter)].uid = uid;
+    strncpy(tstats->active_tasks[*(counter)].name, task_name, 25); //Process names should be no longer than 25 characters
+    strcpy(tstats->active_tasks[*(counter)].state, task_state);
+    (*counter)++;
+}

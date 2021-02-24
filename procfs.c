@@ -313,12 +313,12 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
         return -1;
     }
 
-    int uid;
     char line[256] = { 0 };
     char task_name[26] = { 0 };
-    char task_state[13];
+    char task_state[13] = { 0 };
     int i = 0;
     int threshold = 1;
+    int uid;
 
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
@@ -327,7 +327,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
             //realloc tasks when needed
             if (tasks > threshold) {
                 //reallocating memory for active tasks based on task no.
-                tstats->active_tasks = (struct task_info*)realloc(tstats->active_tasks, sizeof(struct task_info)*tasks);
+                tstats->active_tasks = (struct task_info*)realloc(tstats->active_tasks, sizeof(struct task_info) * tasks);
                 ++threshold;
             } 
             //error checking
@@ -335,16 +335,16 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 return EXIT_FAILURE;
             }
 
-            char direct[1024];
-            snprintf(direct, 1024, "%s/%s/status", proc_dir, entry->d_name);
+            char str[264];
+            //formats and stores 
+            snprintf(str, 264, "%s/%s/status", proc_dir, entry->d_name);
 
-            int fd = open(direct, O_RDONLY);
+            int fd = open(str, O_RDONLY);
 
                 ssize_t read_sz = 0;    
 
                 while ((read_sz = lineread(fd, line, 256)) > 0) {
                     //check if line of task name
-
                     if (strstr(line, "Name:")) {
                         char *next_tok = line;
                         next_token(&next_tok, " \t\n");
@@ -383,7 +383,7 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 }
                 //update total tasks
                 tstats->total = tasks; 
-                //update task status
+                //update task states
                 tstats->running = running;
                 tstats->waiting = waiting;
                 tstats->sleeping = sleeping;
@@ -391,42 +391,26 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats) {
                 tstats->zombie = zombie;
 
                 close(fd);
-
                 //check whether state of task is running
                 if (strcmp(task_state, "running") == 0) {
-                    tstats->active_tasks[i].pid = atoi(entry->d_name);
-                    tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
-                    strcpy(tstats->active_tasks[i].state, task_state);
-                    i++;
+                    fill_tasks(tstats, atoi(entry->d_name), uid, task_name, task_state, &i);
                 }
                 //check whether state of task is sleeping
                 else if (strcmp(task_state, "disk sleep") == 0) {
-                    tstats->active_tasks[i].pid = atoi(entry->d_name);
-                    tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
-                    strcpy(tstats->active_tasks[i].state, task_state);
-                    i++;
+                    fill_tasks(tstats, atoi(entry->d_name), uid, task_name, task_state, &i);
+
                 }
                 //check whether state of task is stopped
                 else if (strcmp(task_state, "stopped") == 0 || strcmp(task_state, "tracing stop") == 0) {
-                    tstats->active_tasks[i].pid = atoi(entry->d_name);
-                    tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
-                    strcpy(tstats->active_tasks[i].state, task_state);
-                    i++;
+                    fill_tasks(tstats, atoi(entry->d_name), uid, task_name, task_state, &i);
+
                 } 
                 //check whether state of task is zombie
                 else if (strcmp(task_state, "zombie") == 0) {
-                    tstats->active_tasks[i].pid = atoi(entry->d_name);
-                    tstats->active_tasks[i].uid = uid;
-                    strncpy(tstats->active_tasks[i].name, task_name, 25); //Process names should be no longer than 25 characters
-                    strcpy(tstats->active_tasks[i].state, task_state);
-                    i++;
+                    fill_tasks(tstats, atoi(entry->d_name), uid, task_name, task_state, &i);
                 }
         }
     }
-
     closedir(directory); 
     return 0;
 }

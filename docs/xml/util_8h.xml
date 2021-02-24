@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="util.h" line="16" column="5" bodyfile="util.c" bodystart="15" bodyend="34" declfile="util.h" declline="16" declcolumn="5"/>
+        <location file="util.h" line="17" column="5" bodyfile="util.c" bodystart="16" bodyend="35" declfile="util.h" declline="17" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="util_8h_1a04380a46a51cecbff707bf9199012de9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>ssize_t</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="util.h" line="28" column="9" bodyfile="util.c" bodystart="36" bodyend="46" declfile="util.h" declline="28" declcolumn="9"/>
+        <location file="util.h" line="29" column="9" bodyfile="util.c" bodystart="37" bodyend="47" declfile="util.h" declline="29" declcolumn="9"/>
       </memberdef>
       <memberdef kind="function" id="util_8h_1a85946f927132d967d9f348e19b252c3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>ssize_t</type>
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="util.h" line="39" column="9" bodyfile="util.c" bodystart="48" bodyend="72" declfile="util.h" declline="39" declcolumn="9"/>
+        <location file="util.h" line="40" column="9" bodyfile="util.c" bodystart="49" bodyend="73" declfile="util.h" declline="40" declcolumn="9"/>
       </memberdef>
       <memberdef kind="function" id="util_8h_1a36cc4e6b1ce708ed7492ae0979b10bf5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>char *</type>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="util.h" line="49" column="6" bodyfile="util.c" bodystart="74" bodyend="110" declfile="util.h" declline="49" declcolumn="6"/>
+        <location file="util.h" line="50" column="6" bodyfile="util.c" bodystart="75" bodyend="111" declfile="util.h" declline="50" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="util_8h_1a75fa1b7f896c1bc05d855ce9d9ceeffe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="util.h" line="58" column="6" bodyfile="util.c" bodystart="112" bodyend="139" declfile="util.h" declline="58" declcolumn="6"/>
+        <location file="util.h" line="59" column="6" bodyfile="util.c" bodystart="113" bodyend="140" declfile="util.h" declline="59" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="util_8h_1aa9ecc65e735e295dc53f92cfefca6d9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -312,7 +312,95 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="util.h" line="67" column="6" bodyfile="util.c" bodystart="141" bodyend="171" declfile="util.h" declline="67" declcolumn="6"/>
+        <location file="util.h" line="68" column="6" bodyfile="util.c" bodystart="142" bodyend="172" declfile="util.h" declline="68" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="util_8h_1a2fa00e275526a9e990ed3ebea1330825" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fill_tasks</definition>
+        <argsstring>(struct task_stats *tstats, int pid, int uid, char *task_name, char *task_state, int *counter)</argsstring>
+        <name>fill_tasks</name>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>tstats</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>pid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>uid</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>task_name</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>task_state</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>counter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Fill in tasks with task information</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tstats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the task statistics </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the process ID </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>uid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the user ID </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>task_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the task name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>task_state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the task state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>counter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the counter that keeps track of tasks </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="util.h" line="81" column="6" bodyfile="util.c" bodystart="174" bodyend="180" declfile="util.h" declline="81" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -327,19 +415,22 @@
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;dirent.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>open_path(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal">ssize_t<sp/>one_lineread(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fd,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>sz,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*delim);</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal">ssize_t<sp/>lineread(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fd,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>sz);</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*next_token(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**str_ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*delim);</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>draw_percbar(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frac);</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>uid_to_uname(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name_buf,<sp/>uid_t<sp/>uid);</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtask__stats" kindref="compound">task_stats</ref>;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>open_path(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*path);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal">ssize_t<sp/>one_lineread(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fd,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>sz,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*delim);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal">ssize_t<sp/>lineread(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>fd,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>sz);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*next_token(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**str_ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*delim);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>draw_percbar(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*buf,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>frac);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>uid_to_uname(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*name_buf,<sp/>uid_t<sp/>uid);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>fill_tasks(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*tstats,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pid,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>uid,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*task_name,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*task_state,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>*counter);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
     </programlisting>
     <location file="util.h"/>
   </compounddef>

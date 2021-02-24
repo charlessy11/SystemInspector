@@ -5,6 +5,7 @@
 #include <dirent.h>
 #include <stdio.h>
 
+struct task_stats;
 /**
 * Opens specified path
 *
@@ -65,5 +66,18 @@ void draw_percbar(char *buf, double frac);
 *
 */
 void uid_to_uname(char *name_buf, uid_t uid);
+
+/**
+* Fill in tasks with task information
+*
+* @param tstats the task statistics
+* @param pid the process ID
+* @param uid the user ID
+* @param task_name the task name
+* @param task_state the task state
+* @param counter the counter that keeps track of tasks
+*
+*/
+void fill_tasks(struct task_stats *tstats, int pid, int uid, char *task_name, char *task_state, int *counter);
 
 #endif

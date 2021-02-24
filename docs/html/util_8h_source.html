@@ -72,19 +72,23 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;dirent.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keywordtype">int</span> open_path(<span class="keywordtype">char</span> *proc_dir, <span class="keywordtype">char</span> *path);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;ssize_t one_lineread(<span class="keywordtype">int</span> fd, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> sz, <span class="keywordtype">char</span> *delim);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;ssize_t lineread(<span class="keywordtype">int</span> fd, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> sz);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">char</span> *next_token(<span class="keywordtype">char</span> **str_ptr, <span class="keyword">const</span> <span class="keywordtype">char</span> *delim);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> draw_percbar(<span class="keywordtype">char</span> *buf, <span class="keywordtype">double</span> frac);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">void</span> uid_to_uname(<span class="keywordtype">char</span> *name_buf, uid_t uid);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">struct </span><a class="code" href="structtask__stats.html">task_stats</a>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">int</span> open_path(<span class="keywordtype">char</span> *proc_dir, <span class="keywordtype">char</span> *path);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;ssize_t one_lineread(<span class="keywordtype">int</span> fd, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> sz, <span class="keywordtype">char</span> *delim);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;ssize_t lineread(<span class="keywordtype">int</span> fd, <span class="keywordtype">char</span> *buf, <span class="keywordtype">size_t</span> sz);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">char</span> *next_token(<span class="keywordtype">char</span> **str_ptr, <span class="keyword">const</span> <span class="keywordtype">char</span> *delim);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> draw_percbar(<span class="keywordtype">char</span> *buf, <span class="keywordtype">double</span> frac);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> uid_to_uname(<span class="keywordtype">char</span> *name_buf, uid_t uid);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> fill_tasks(<span class="keyword">struct</span> <a class="code" href="structtask__stats.html">task_stats</a> *tstats, <span class="keywordtype">int</span> pid, <span class="keywordtype">int</span> uid, <span class="keywordtype">char</span> *task_name, <span class="keywordtype">char</span> *task_state, <span class="keywordtype">int</span> *counter);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astructtask__stats_html"><div class="ttname"><a href="structtask__stats.html">task_stats</a></div><div class="ttdef"><b>Definition:</b> procfs.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

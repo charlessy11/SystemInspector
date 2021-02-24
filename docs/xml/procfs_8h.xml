@@ -5,6 +5,7 @@
     <includes local="no">sys/types.h</includes>
     <includedby refid="display_8c" local="yes">display.c</includedby>
     <includedby refid="procfs_8c" local="yes">procfs.c</includedby>
+    <includedby refid="util_8c" local="yes">util.c</includedby>
     <incdepgraph>
       <node id="2">
         <label>sys/types.h</label>
@@ -485,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="procfs.h" line="177" column="5" bodyfile="procfs.c" bodystart="302" bodyend="432" declfile="procfs.h" declline="177" declcolumn="5"/>
+        <location file="procfs.h" line="177" column="5" bodyfile="procfs.c" bodystart="302" bodyend="416" declfile="procfs.h" declline="177" declcolumn="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
